@@ -12,15 +12,16 @@ namespace Algorytm_Ewolucyjny.Services
 
         public string ChooseFileToOpen()
         {
-            var filePath = string.Empty;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string filePath;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = "D:\\gitProjects\\SI_Lab1\\Algorytm_Ewolucyjny\\EA DATA\\",
+                Filter = "TSP files (*.tsp)|*.tsp|All files (*.*)| *.*",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
 
-            openFileDialog.InitialDirectory = "D:\\gitProjects\\SI_Lab1\\Algorytm_Ewolucyjny\\EA DATA\\";
-            openFileDialog.Filter = "TSP files (*.tsp)|*.tsp|All files (*.*)| *.*";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
-
-            if(openFileDialog.ShowDialog().GetValueOrDefault())
+            if (openFileDialog.ShowDialog().GetValueOrDefault())
             {
                 filePath =  openFileDialog.FileName;
             }
@@ -32,6 +33,9 @@ namespace Algorytm_Ewolucyjny.Services
             return filePath;
 
         }
+
+        public 
+
 
     }
 }
