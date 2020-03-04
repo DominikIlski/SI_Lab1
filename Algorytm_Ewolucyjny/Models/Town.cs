@@ -7,10 +7,10 @@ namespace Algorytm_Ewolucyjny.Models
     public class Town
     {
         int Numer { set; get; }
-        double X { set; get; }
-        double Y { set; get; }
+        float X { set; get; }
+        float Y { set; get; }
 
-        public Town(int number, double x, double y)
+        public Town(int number, float x, float y)
         {
             Numer = number;
             X = x;
@@ -20,8 +20,8 @@ namespace Algorytm_Ewolucyjny.Models
         public Town(string number, string x, string y)
         {
             Numer = int.Parse(number);
-            X = double.Parse(x);
-            Y = double.Parse(y);
+            X = float.Parse(x.Replace('.', ','));
+            Y =float.Parse(x.Replace('.', ','));
         }
     }
 }

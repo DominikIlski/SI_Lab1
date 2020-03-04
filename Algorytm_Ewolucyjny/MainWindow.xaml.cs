@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Algorytm_Ewolucyjny.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,17 @@ namespace Algorytm_Ewolucyjny
     /// </summary>
     public partial class MainWindow : Window
     {
+        FileService FileService;
         public MainWindow()
         {
             InitializeComponent();
+            FileService = new FileService();
         }
 
         private void menuOpen_Click(object sender, RoutedEventArgs e)
         {
+
+            FileService.LoadData();
 
         }
 

@@ -12,14 +12,21 @@ namespace Algorytm_Ewolucyjny.Services
     {
         private readonly string FILEPATH_ERROR = "Problem With filePath";
 
-        public string ChooseFileToOpen()
+        public Agglomeration Agglomeration { set; get; }
+
+        public FileService()
+        {
+            Agglomeration = new Agglomeration();
+        }
+
+        private string ChooseFileToOpen()
         {
             string filePath;
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 InitialDirectory = "D:\\gitProjects\\SI_Lab1\\Algorytm_Ewolucyjny\\EA DATA\\",
                 Filter = "TSP files (*.tsp)|*.tsp|All files (*.*)| *.*",
-                FilterIndex = 2,
+                FilterIndex = 1,
                 RestoreDirectory = true
             };
 
@@ -36,27 +43,36 @@ namespace Algorytm_Ewolucyjny.Services
 
         }
 
-        public Agglomeration LoadAglomeration(string filePath)
+        private bool LoadAglomeration(string filePath)
         {
             string[] fileData;
-            Agglomeration agglomeration;
+            bool result;
             if (filePath != FILEPATH_ERROR)
             {
                 fileData = File.ReadAllLines(filePath);
                 
-                agglomeration = new Agglomeration(GetName(fileData[0]), GetType(fileData[1]), 
+                Agglomeration = new Agglomeration(GetName(fileData[0]), GetType(fileData[1]), 
                     GetComment(fileData[2]), GetDimension(fileData[3]), GetEdgeWeightType(fileData[4]), GetDisplayDataType(fileData[5]), GetTowns(fileData));
-               
+                result = true;
             }
             else
             {
                 fileData = new string[0];
-                agglomeration = new Agglomeration();
+                Agglomeration = new Agglomeration();
+                result = false;
             }
 
-            return agglomeration;
+            return result;
         }
 
+        public bool LoadData()
+        {
+            bool result;
+            string filePath = ChooseFileToOpen();
+            result = LoadAglomeration(filePath);
+            return result;
+           
+        }
 
         #region privateMethods
 
@@ -78,12 +94,12 @@ namespace Algorytm_Ewolucyjny.Services
             List<Town> towns = new List<Town>();
             string[] splitOutcome;
             string[]? separator = { " ", "  " };
-            for (int i = 7; i < towns.Count; i++)
+            for (int i = 7; i < fileData.Length; i++)
             {
                 splitOutcome = fileData[i].Split(separator, StringSplitOptions.RemoveEmptyEntries);
                
                 towns.Add(new Town(splitOutcome[0], splitOutcome[1], splitOutcome[2]));
-                if (towns[i + 1].Equals("EOF")) break;
+                if (fileData[i + 1].Equals("EOF")) break;
 
             }
 
