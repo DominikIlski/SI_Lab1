@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Algorytm_Ewolucyjny.Models
 {
-    class Town
+    public class Town
     {
         int Numer { set; get; }
         double X { set; get; }
@@ -15,6 +15,13 @@ namespace Algorytm_Ewolucyjny.Models
             Numer = number;
             X = x;
             Y = y;
+        }
+
+        public Town(string number, string x, string y)
+        {
+            Numer = int.Parse(number);
+            X = double.Parse(x);
+            Y = double.Parse(y);
         }
     }
 }

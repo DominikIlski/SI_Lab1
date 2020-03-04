@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Algorytm_Ewolucyjny.Models
 {
-    class Agglomeration
+    public class Agglomeration
     {
        
-        string Name { set; get; }
+        public string Name { set; get; }
         string Type { set; get; }
         string Comment { set; get; }
         int Dimension { set; get; }
@@ -24,6 +24,16 @@ namespace Algorytm_Ewolucyjny.Models
             Dimension = dimension;
             EdgeWeightType = edgeWeightType;
             Towns = new List<Town>(towns);
+        }
+
+        public Agglomeration()
+        {
+            Name = "Error Creating Agglomeration";
+            Type = string.Empty;
+            Comment = string.Empty;
+            Dimension = 0;
+            EdgeWeightType = string.Empty;
+            Towns = new List<Town>(0);
         }
 
     }
