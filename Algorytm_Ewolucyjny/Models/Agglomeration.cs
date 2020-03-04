@@ -23,6 +23,7 @@ namespace Algorytm_Ewolucyjny.Models
             Comment = comment;
             Dimension = dimension;
             EdgeWeightType = edgeWeightType;
+            DisplayDataType = displayDataType;
             Towns = new List<Town>(towns);
         }
 
@@ -33,6 +34,7 @@ namespace Algorytm_Ewolucyjny.Models
             Comment = string.Empty;
             Dimension = 0;
             EdgeWeightType = string.Empty;
+            DisplayDataType = string.Empty;
             Towns = new List<Town>(0);
         }
 

@@ -6,7 +6,40 @@
         xmlns:local="clr-namespace:Algorytm_Ewolucyjny"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem x:Name="menuOpen" Header="_Open"
+                          InputGestureText="Ctrl+O" Click="menuOpen_Click">
+                    <MenuItem.Icon>
+                        <Image Source="./Resources/OpenFile.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem x:Name="menuSave" Header="_Save as"
+                          InputGestureText="Ctrl+S" Click="menuSave_Click">
+                    <MenuItem.Icon>
+                        <Image Source="./Resources/SaveAs.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
 
-    </Grid>
+            <MenuItem Header="_Theme">
+                <MenuItem x:Name="setThemeWhite" Header="_White"
+                          Click="setThemeWhite_Click">
+                    
+                </MenuItem>
+
+                <MenuItem x:Name="setThemeBlack" Header="_Black"
+                          Click="setThemeBlack_Click">
+                    
+                </MenuItem>
+            </MenuItem>
+
+        </Menu>
+  
+    </DockPanel>
+    
+    
+    
 </Window>

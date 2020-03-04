@@ -24,5 +24,25 @@ namespace Algorytm_Ewolucyjny
         {
             InitializeComponent();
         }
+
+        private void menuOpen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void setThemeWhite_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void setThemeBlack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
