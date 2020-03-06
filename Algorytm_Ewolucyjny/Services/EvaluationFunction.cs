@@ -16,9 +16,12 @@ namespace Algorytm_Ewolucyjny.Services
         
         public double EvaluateSpecimen(List<int> specimen)
         {
-
-
-
+            double score = 0;
+            for (int i = 1; i < specimen.Count; i++)
+            {
+                score += CountDistance(specimen[i], specimen[i - 1]);
+            }
+            return score;
         }
 
 
