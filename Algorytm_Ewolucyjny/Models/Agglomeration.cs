@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Algorytm_Ewolucyjny.Models
@@ -10,7 +11,7 @@ namespace Algorytm_Ewolucyjny.Models
         public string Name { set; get; }
         string Type { set; get; }
         string Comment { set; get; }
-        int Dimension { set; get; }
+        public int Dimension { set;  get; }
         string EdgeWeightType { set; get; }
         string DisplayDataType { set; get; }
         List<Town> Towns { set; get; }
@@ -36,6 +37,12 @@ namespace Algorytm_Ewolucyjny.Models
             EdgeWeightType = string.Empty;
             DisplayDataType = string.Empty;
             Towns = new List<Town>(0);
+        }
+
+        public List<int> GetAgglomeration()
+        {
+            var numberList = Enumerable.Range(1, Dimension).ToList();
+            return numberList;
         }
 
     }

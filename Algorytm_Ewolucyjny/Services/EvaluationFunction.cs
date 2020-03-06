@@ -6,5 +6,17 @@ namespace Algorytm_Ewolucyjny.Services
 {
     class EvaluationFunction
     {
+
+        Population Population { set; get; }
+        int PopSize { set; get; }
+        public EvaluationFunction()
+        {
+            
+            
+
+        }
+
+
+
     }
 }
