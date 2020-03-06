@@ -24,5 +24,8 @@ namespace Algorytm_Ewolucyjny.Models
                 list[n] = value;
             }
         }
+
+       
+
     }
 }
