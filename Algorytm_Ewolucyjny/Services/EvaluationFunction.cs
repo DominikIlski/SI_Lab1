@@ -9,12 +9,8 @@ namespace Algorytm_Ewolucyjny.Services
 
         Population Population { set; get; }
         int PopSize { set; get; }
-        public EvaluationFunction()
-        {
-            
-            
 
-        }
+       
 
 
 

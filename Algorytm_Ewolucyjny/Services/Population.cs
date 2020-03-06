@@ -9,7 +9,7 @@ namespace Algorytm_Ewolucyjny.Services
 {
     class Population
     {
-        int PopSize { set; get; }
+        public int PopSize { set; get; }
 
         Agglomeration Agglomeration { set; get; }
         
@@ -33,8 +33,9 @@ namespace Algorytm_Ewolucyjny.Services
         public bool CreatNewGeneration(ref List<List<int>> generation)
         {
             bool result = true;
-            
-                
+
+           
+           
 
             if (generation is null)
                 result = false;
@@ -42,7 +43,7 @@ namespace Algorytm_Ewolucyjny.Services
             {
 
                 var specimenElement = Agglomeration.GetAgglomeration();
-                generation = Enumerable.Repeat(specimenElement, Agglomeration.Dimension).ToList();
+                generation = Enumerable.Repeat(specimenElement, PopSize).ToList();
 
                 generation.ForEach(Shuffle);
 

@@ -76,17 +76,17 @@ namespace Algorytm_Ewolucyjny.Services
 
         #region privateMethods
 
-        private string GetName(string name) => name.Split(':')[1];
+        private string GetName(string name) => name.Split(": ")[1];
         
-        private string GetType(string type) => type.Split(':')[1];
+        private string GetType(string type) => type.Split(": ")[1];
         
-        private string GetComment(string commeny) => commeny.Split(':')[1];
+        private string GetComment(string commeny) => commeny.Split(": ")[1];
         
-        private int GetDimension(string dimension) => int.Parse(dimension.Split(':')[1]);
+        private int GetDimension(string dimension) => int.Parse(dimension.Split(": ")[1]);
         
-        private string GetEdgeWeightType(string weighType) => weighType.Split(':')[1];
+        private string GetEdgeWeightType(string weighType) => weighType.Split(": ")[1];
         
-        private string GetDisplayDataType(string dataType) => dataType.Split(':')[1];
+        private string GetDisplayDataType(string dataType) => dataType.Split(": ")[1];
 
 
         private List<Town> GetTowns(string[] fileData)
