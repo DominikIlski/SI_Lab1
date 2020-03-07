@@ -7,14 +7,14 @@ namespace Algorytm_Ewolucyjny.Services
 {
     class  EvaluationFunction
     {
-        Agglomeration Agglomeration { set; get; }
+        
       
-        public EvaluationFunction(Agglomeration agglomeration)
+        public EvaluationFunction()
         {
-            Agglomeration = agglomeration;
+            
         }
 
-        public double EvaluateSpecimen(List<int> specimen)
+        public double EvaluateSpecimen(List<Town> specimen)
         {
             double score = 0;
             for (int i = 1; i < specimen.Count; i++)
@@ -25,22 +25,14 @@ namespace Algorytm_Ewolucyjny.Services
         }
 
 
-        private double CountDistance(int current, int next)
+        private double CountDistance(Town current, Town next)
         {
-            var agglomeration = Agglomeration.Towns;
 
-            var currentTown = agglomeration.Find(t => t.Numer == current) ?? new Town();
-            var nextTown = agglomeration.Find(t => t.Numer == next) ?? new Town();
-            HashSet<Town> test = new HashSet<Town>();
+            var minX = Math.Min(current.X, next.X);
+            var maxX = Math.Max(current.X, next.X);
 
-            
-
-
-            var minX = Math.Min(currentTown.X, nextTown.X);
-            var maxX = Math.Max(currentTown.X, nextTown.X);
-
-            var minY = Math.Min(currentTown.Y, nextTown.Y);
-            var maxY = Math.Max(currentTown.Y, nextTown.Y);
+            var minY = Math.Min(current.Y, next.Y);
+            var maxY = Math.Max(current.Y, next.Y);
 
             var distance = Math.Sqrt(Math.Pow((maxX - minX), 2) + Math.Pow((maxY - minY), 2));
 

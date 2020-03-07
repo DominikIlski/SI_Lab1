@@ -12,14 +12,14 @@ namespace Algorytm_Ewolucyjny.Services
         int PopSize { set; get; }
         Algorithm Algorithm { set; get; }
         EvaluationFunction EvaluationFunction { set; get; }
-        List<List<int>> Population { set; get; }
+        List<List<Town>> Population { set; get; }
 
         public AlgorithmCourse(int popSize, Agglomeration agglomeration)
         {
 
             PopSize = popSize;
             PopulationCreator = new Population(popSize, agglomeration);
-            EvaluationFunction = new EvaluationFunction(agglomeration);
+            EvaluationFunction = new EvaluationFunction();
             
 
         }
@@ -33,10 +33,10 @@ namespace Algorytm_Ewolucyjny.Services
 
         public double Test()
         {
-            var test = new List<List<int>>(PopSize);
+            var test = new List<List<Town>>(PopSize);
             PopulationCreator.CreatNewGeneration(ref test);
 
-            Population = new List<List<int>>(test);
+            Population = new List<List<Town>>(test);
 
             var testValue = EvaluationFunction.EvaluateSpecimen(Population[0]);
 

@@ -28,7 +28,7 @@ namespace Algorytm_Ewolucyjny
         {
             InitializeComponent();
             FileService = new FileService();
-            Console.WriteLine("dupa");
+            
 
         }
 
@@ -46,8 +46,10 @@ namespace Algorytm_Ewolucyjny
 
         private void setThemeWhite_Click(object sender, RoutedEventArgs e)
         {
-            AlgorithmCourse = new AlgorithmCourse(1, FileService.Agglomeration);
-            txtTest.Text = AlgorithmCourse.Test() + "";
+            AlgorithmCourse = new AlgorithmCourse(50, FileService.Agglomeration);
+            var testt = AlgorithmCourse.Test() + "";
+
+            txtTest.Text = testt;
         }
 
         private void setThemeBlack_Click(object sender, RoutedEventArgs e)

@@ -39,10 +39,9 @@ namespace Algorytm_Ewolucyjny.Models
             Towns = new List<Town>(0);
         }
 
-        public List<int> GetAgglomeration()
+        public List<Town> GetAgglomeration()
         {
-            var numberList = Enumerable.Range(1, Dimension).ToList();
-            return numberList;
+            return Towns;
         }
 
     }

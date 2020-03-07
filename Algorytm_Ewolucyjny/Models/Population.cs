@@ -24,7 +24,7 @@ namespace Algorytm_Ewolucyjny.Services
 
         
 
-        public bool CreatNewGeneration(ref List<List<int>> generation)
+        public bool CreatNewGeneration(ref List<List<Town>> generation)
         {
             bool result = true;
 
@@ -39,15 +39,15 @@ namespace Algorytm_Ewolucyjny.Services
                 var specimenElement = Agglomeration.GetAgglomeration();
                 generation = Enumerable.Repeat(specimenElement, PopSize).ToList();
 
-                generation.ForEach(Shuffle);
+                
 
-                /*foreach (var rawSpecimen in generation)
+                foreach (var rawSpecimen in generation)
                 {
 
                     rawSpecimen.Shuffle();
 
                 }
-               */
+               
 
             }
 
@@ -57,24 +57,7 @@ namespace Algorytm_Ewolucyjny.Services
         }
 
 
-        public static void Shuffle(List<int> list)
-        {
-            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
-            int n = list.Count;
-            while (n > 1)
-            {
-                byte[] box = new byte[1];
-                do provider.GetBytes(box);
-                while (!(box[0] < n * (Byte.MaxValue / n)));
-                int k = (box[0] % n);
-                n--;
-                int value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-
-            
-        }
+        
 
 
 
