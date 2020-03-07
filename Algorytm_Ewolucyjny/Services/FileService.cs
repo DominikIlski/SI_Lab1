@@ -12,7 +12,7 @@ namespace Algorytm_Ewolucyjny.Services
     {
         private readonly string FILEPATH_ERROR = "Problem With filePath";
 
-        public Agglomeration Agglomeration { set; get; }
+        public Agglomeration Agglomeration {private set; get; }
 
         public FileService()
         {

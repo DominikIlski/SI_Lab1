@@ -35,6 +35,7 @@
                     
                 </MenuItem>
             </MenuItem>
+            <TextBox x:Name="txtTest" Text="TextBox" TextWrapping="Wrap" Width="120"/>
 
         </Menu>
   

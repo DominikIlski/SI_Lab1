@@ -14,21 +14,15 @@ namespace Algorytm_Ewolucyjny.Services
         Agglomeration Agglomeration { set; get; }
         
 
-        public Population(int popSize)
+        public Population(int popSize, Agglomeration agglomeration)
         {
             PopSize = popSize;
-            Agglomeration = new Agglomeration();
+            Agglomeration = agglomeration;
             
         }
 
 
-        public bool SetAgglomeration(Agglomeration agglomeration)
-        {
-
-            Agglomeration = agglomeration ?? new Agglomeration();
-            return !Agglomeration.Name.Equals("Error Creating Agglomeration");
-
-        }
+        
 
         public bool CreatNewGeneration(ref List<List<int>> generation)
         {

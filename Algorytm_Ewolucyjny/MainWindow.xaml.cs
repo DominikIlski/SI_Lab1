@@ -22,10 +22,14 @@ namespace Algorytm_Ewolucyjny
     public partial class MainWindow : Window
     {
         FileService FileService;
+        AlgorithmCourse AlgorithmCourse;
+
         public MainWindow()
         {
             InitializeComponent();
             FileService = new FileService();
+            Console.WriteLine("dupa");
+
         }
 
         private void menuOpen_Click(object sender, RoutedEventArgs e)
@@ -42,7 +46,8 @@ namespace Algorytm_Ewolucyjny
 
         private void setThemeWhite_Click(object sender, RoutedEventArgs e)
         {
-
+            AlgorithmCourse = new AlgorithmCourse(1, FileService.Agglomeration);
+            txtTest.Text = AlgorithmCourse.Test() + "";
         }
 
         private void setThemeBlack_Click(object sender, RoutedEventArgs e)
