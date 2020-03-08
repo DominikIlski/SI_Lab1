@@ -10,15 +10,15 @@ namespace Algorytm_Ewolucyjny.Models
 
         private static Random rng = new Random();
 
-        public static void Shuffle<T>(this IList<T> list)
+        public static void Shuffle(this List<Town> list)
         {
             int n = list.Count;
             while (n > 1)
             {
                 n--;
                 int k = rng.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
+                Town value = (Town)list[k].Clone();
+                list[k] = (Town)list[n].Clone();
                 list[n] = value;
             }
         }

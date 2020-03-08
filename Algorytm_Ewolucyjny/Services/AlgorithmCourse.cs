@@ -1,6 +1,7 @@
 ﻿using Algorytm_Ewolucyjny.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Algorytm_Ewolucyjny.Services
@@ -12,7 +13,7 @@ namespace Algorytm_Ewolucyjny.Services
         int PopSize { set; get; }
         Algorithm Algorithm { set; get; }
         EvaluationFunction EvaluationFunction { set; get; }
-        List<List<Town>> Generation { set; get; }
+        
         bool WasRunning = false;
         public AlgorithmCourse(int popSize, Agglomeration agglomeration)
         {
@@ -21,7 +22,7 @@ namespace Algorytm_Ewolucyjny.Services
             Population = new Population(popSize, agglomeration);
             EvaluationFunction = new EvaluationFunction(agglomeration.EdgeWeightType);
             Algorithm = new Algorithm();
-            Generation = new List<List<Town>>();
+            
             
 
         }
@@ -40,23 +41,19 @@ namespace Algorytm_Ewolucyjny.Services
 
         public string GetScoreString()
         {
+            
+            StringBuilder stringBuilder = new StringBuilder();
             if(WasRunning)
+            {
+                var querry = Algorithm.FinalScore.Select((x, Index)=> $"Specimen number: {Index} | scored: {x}").ToArray();
+                stringBuilder.AppendJoin('\n', querry);
+            }
 
+            return stringBuilder.ToString();
         }
 
-        private string StringScore
+       
 
-        public double Test()
-        {
-            
-            Population.CreatNewGeneration(Generation);
-
-            
-
-            var testValue = EvaluationFunction.EvaluateSpecimen(Generation[0]);
-
-            return testValue;
-
-        }
+        
     }
 }

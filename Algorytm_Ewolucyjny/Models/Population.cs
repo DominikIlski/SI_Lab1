@@ -24,35 +24,24 @@ namespace Algorytm_Ewolucyjny.Services
 
         
 
-        public bool CreatNewGeneration(List<List<Town>> generation)
+        public List<List<Town>> CreatNewGeneration()
         {
-            bool result = true;
-
-           
-           
-
-            if (generation is null)
-                result = false;
-            else
+            
+            var specimenElement = Agglomeration.GetAgglomeration();
+            var generation = new List<List<Town>>();
+            
+            for (int i = 0; i < PopSize; i++)
+            {
+                generation.Add(new List<Town>(specimenElement));
+            }
+            foreach (var specimen in generation)
             {
 
-                var specimenElement = Agglomeration.GetAgglomeration();
-                generation = Enumerable.Repeat(specimenElement, PopSize).ToList();
-
-                
-
-                foreach (var rawSpecimen in generation)
-                {
-
-                    rawSpecimen.Shuffle();
-
-                }
-               
+                specimen.Shuffle();
 
             }
 
-
-            return result;
+            return generation;
 
         }
 

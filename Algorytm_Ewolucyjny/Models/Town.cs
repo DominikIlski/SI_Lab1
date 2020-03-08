@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Algorytm_Ewolucyjny.Models
 {
-    public class Town : IEquatable<int>
+    public class Town : IEquatable<int>, ICloneable
     {
         public int Numer { private set; get; }
         public double X { private set; get; }
@@ -29,7 +29,7 @@ namespace Algorytm_Ewolucyjny.Models
         {
             Numer = int.Parse(number);
             X = double.Parse(x.Replace('.', ','));
-            Y =double.Parse(x.Replace('.', ','));
+            Y =double.Parse(y.Replace('.', ','));
         }
 
 
@@ -39,6 +39,11 @@ namespace Algorytm_Ewolucyjny.Models
             if (other == 0) return false;
             return (this.Numer.Equals(other));
 
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

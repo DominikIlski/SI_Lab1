@@ -24,6 +24,7 @@ namespace Algorytm_Ewolucyjny.Services
             {
                 score += CountDistance(specimen[i - 1], specimen[i]);
             }
+            score += CountDistance(specimen[specimen.Count - 1], specimen[0]);
             return score;
         }
 

@@ -1,4 +1,5 @@
-﻿using Algorytm_Ewolucyjny.Services;
+﻿using Algorytm_Ewolucyjny.Models;
+using Algorytm_Ewolucyjny.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,8 +48,10 @@ namespace Algorytm_Ewolucyjny
         private void setThemeWhite_Click(object sender, RoutedEventArgs e)
         {
             AlgorithmCourse = new AlgorithmCourse(50, FileService.Agglomeration);
-            var testt = AlgorithmCourse.Test() + "";
-
+            AlgorithmCourse.SetAlgorithm(new Greedy());
+            AlgorithmCourse.Run();
+            var testt = AlgorithmCourse.GetScoreString();
+            
             txtTest.Text = testt;
         }
 
