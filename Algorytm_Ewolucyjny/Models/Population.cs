@@ -24,7 +24,7 @@ namespace Algorytm_Ewolucyjny.Services
 
         
 
-        public bool CreatNewGeneration(ref List<List<Town>> generation)
+        public bool CreatNewGeneration(List<List<Town>> generation)
         {
             bool result = true;
 

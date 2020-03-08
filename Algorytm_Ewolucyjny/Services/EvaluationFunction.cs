@@ -8,10 +8,13 @@ namespace Algorytm_Ewolucyjny.Services
     class  EvaluationFunction
     {
         
-      
-        public EvaluationFunction()
+        public TownType TownType { private set; get; }
+
+        public EvaluationFunction(TownType townType)
         {
-            
+            TownType = townType;
+
+
         }
 
         public double EvaluateSpecimen(List<Town> specimen)
@@ -25,22 +28,55 @@ namespace Algorytm_Ewolucyjny.Services
         }
 
 
-        private double CountDistance(Town current, Town next)
+        public double CountDistance(Town current, Town next)
         {
+            double distance = 0;
 
-            var minX = Math.Min(current.X, next.X);
-            var maxX = Math.Max(current.X, next.X);
+            
 
-            var minY = Math.Min(current.Y, next.Y);
-            var maxY = Math.Max(current.Y, next.Y);
+            if (TownType == TownType.EUC_2D)
+                distance = CalculateEuc2D(current, next);
 
-            var distance = Math.Sqrt(Math.Pow((maxX - minX), 2) + Math.Pow((maxY - minY), 2));
+            if (TownType == TownType.GEO)
+                distance = CalcualteGeo(current, next);
+
 
             return distance;
 
         }
 
+        private double CalculateEuc2D(Town current, Town next) =>
+           Math.Sqrt(Math.Pow((current.X - next.X), 2) + Math.Pow((current.Y - next.Y), 2));
 
+        private double CalcualteGeo(Town current, Town next)
+        {
+
+            var deg = Math.Floor(current.X);
+            var min = current.X - deg;
+            var latitudeI = (Math.PI * (deg + (5.0 * min) / 3.0)) / 180.0;
+
+            deg = Math.Floor(current.Y);
+            min = current.Y - deg;
+            var longitudeI = (Math.PI * (deg + (5.0 * min) / 3.0)) / 180.0;
+
+            deg = Math.Floor(next.X);
+            min = next.X - deg;
+            var latitudeJ = (Math.PI * (deg + (5.0 * min) / 3.0)) / 180.0;
+
+            deg = Math.Floor(next.Y);
+            min = next.Y - deg;
+            var longitudeJ = (Math.PI * (deg + (5.0 * min) / 3.0)) / 180.0;
+
+            var RRR = 6378.388;
+            var q1 = Math.Cos(longitudeI - longitudeJ);
+            var q2 = Math.Cos(latitudeI - latitudeJ);
+           var q3 = Math.Cos(latitudeI + latitudeJ);
+            return Math.Round(
+                RRR * Math.Acos(0.5 * ((1.0 + q1) * q2 - (1.0 - q1) * q3)) + 1.0);
+
+        }
+
+        
 
     }
 }

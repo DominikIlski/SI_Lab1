@@ -12,12 +12,12 @@ namespace Algorytm_Ewolucyjny.Models
         public string Type { private set; get; }
         public string Comment { private set; get; }
         public int Dimension { private set;  get; }
-        public string EdgeWeightType { private set; get; }
+        public TownType EdgeWeightType { private set; get; }
         public string DisplayDataType { private set; get; }
         public List<Town> Towns { private set; get; }
 
         public Agglomeration(string name, string type, string comment, int dimension, 
-                             string edgeWeightType, string displayDataType, List<Town> towns)
+                             TownType edgeWeightType, string displayDataType, List<Town> towns)
         {
             Name = name;
             Type = type;
@@ -34,7 +34,7 @@ namespace Algorytm_Ewolucyjny.Models
             Type = string.Empty;
             Comment = string.Empty;
             Dimension = 0;
-            EdgeWeightType = string.Empty;
+            EdgeWeightType = TownType.ERROR;
             DisplayDataType = string.Empty;
             Towns = new List<Town>(0);
         }

@@ -52,7 +52,7 @@ namespace Algorytm_Ewolucyjny.Services
                 fileData = File.ReadAllLines(filePath);
                 
                 Agglomeration = new Agglomeration(GetName(fileData[0]), GetType(fileData[1]), 
-                    GetComment(fileData[2]), GetDimension(fileData[3]), GetEdgeWeightType(fileData[4]), GetDisplayDataType(fileData[5]), GetTowns(fileData));
+                    GetComment(fileData[2]), GetDimension(fileData[3]), EstimateTownType(GetEdgeWeightType(fileData[4])), GetDisplayDataType(fileData[5]), GetTowns(fileData));
                 result = true;
             }
             else
@@ -85,7 +85,24 @@ namespace Algorytm_Ewolucyjny.Services
         private int GetDimension(string dimension) => int.Parse(dimension.Split(": ")[1]);
         
         private string GetEdgeWeightType(string weighType) => weighType.Split(": ")[1];
-        
+
+        private TownType EstimateTownType(string townType)
+        {
+
+            TownType type = TownType.ERROR;
+            if (townType.Equals("GEO"))
+                type = TownType.GEO;
+
+            if (townType.Equals("EUC_2D"))
+                type = TownType.EUC_2D;
+           
+            if(type == TownType.ERROR)
+                throw new Exception("Problem with TownType");
+
+            return type;
+
+        }
+
         private string GetDisplayDataType(string dataType) => dataType.Split(": ")[1];
 
 

@@ -8,18 +8,20 @@ namespace Algorytm_Ewolucyjny.Services
     class AlgorithmCourse
     {
 
-        Population PopulationCreator { set; get; }
+        Population Population { set; get; }
         int PopSize { set; get; }
         Algorithm Algorithm { set; get; }
         EvaluationFunction EvaluationFunction { set; get; }
-        List<List<Town>> Population { set; get; }
-
+        List<List<Town>> Generation { set; get; }
+        bool WasRunning = false;
         public AlgorithmCourse(int popSize, Agglomeration agglomeration)
         {
 
             PopSize = popSize;
-            PopulationCreator = new Population(popSize, agglomeration);
-            EvaluationFunction = new EvaluationFunction();
+            Population = new Population(popSize, agglomeration);
+            EvaluationFunction = new EvaluationFunction(agglomeration.EdgeWeightType);
+            Algorithm = new Algorithm();
+            Generation = new List<List<Town>>();
             
 
         }
@@ -30,15 +32,28 @@ namespace Algorytm_Ewolucyjny.Services
             Algorithm = algorithm;
         }
 
+        public void Run()
+        {
+            Algorithm.Evaluation(EvaluationFunction, Population);
+            WasRunning = true;
+        }
+
+        public string GetScoreString()
+        {
+            if(WasRunning)
+
+        }
+
+        private string StringScore
 
         public double Test()
         {
-            var test = new List<List<Town>>(PopSize);
-            PopulationCreator.CreatNewGeneration(ref test);
+            
+            Population.CreatNewGeneration(Generation);
 
-            Population = new List<List<Town>>(test);
+            
 
-            var testValue = EvaluationFunction.EvaluateSpecimen(Population[0]);
+            var testValue = EvaluationFunction.EvaluateSpecimen(Generation[0]);
 
             return testValue;
 
