@@ -43,7 +43,7 @@ namespace Algorytm_Ewolucyjny.Services
 
         }
 
-        private bool LoadAglomeration(string filePath)
+        private bool LoadAgglomeration(string filePath)
         {
             string[] fileData;
             bool result;
@@ -69,7 +69,7 @@ namespace Algorytm_Ewolucyjny.Services
         {
             bool result;
             string filePath = ChooseFileToOpen();
-            result = LoadAglomeration(filePath);
+            result = LoadAgglomeration(filePath);
             return result;
            
         }

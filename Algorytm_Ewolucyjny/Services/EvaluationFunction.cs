@@ -71,7 +71,7 @@ namespace Algorytm_Ewolucyjny.Services
             var RRR = 6378.388;
             var q1 = Math.Cos(longitudeI - longitudeJ);
             var q2 = Math.Cos(latitudeI - latitudeJ);
-           var q3 = Math.Cos(latitudeI + latitudeJ);
+            var q3 = Math.Cos(latitudeI + latitudeJ);
             return Math.Round(
                 RRR * Math.Acos(0.5 * ((1.0 + q1) * q2 - (1.0 - q1) * q3)) + 1.0);
 

@@ -10,7 +10,6 @@ namespace Algorytm_Ewolucyjny.Services
     {
 
         Population Population { set; get; }
-        int PopSize { set; get; }
         Algorithm Algorithm { set; get; }
         EvaluationFunction EvaluationFunction { set; get; }
         
@@ -18,7 +17,7 @@ namespace Algorytm_Ewolucyjny.Services
         public AlgorithmCourse(int popSize, Agglomeration agglomeration)
         {
 
-            PopSize = popSize;
+            
             Population = new Population(popSize, agglomeration);
             EvaluationFunction = new EvaluationFunction(agglomeration.EdgeWeightType);
             Algorithm = new Algorithm();

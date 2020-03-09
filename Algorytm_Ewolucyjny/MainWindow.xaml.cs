@@ -47,7 +47,7 @@ namespace Algorytm_Ewolucyjny
 
         private void setThemeWhite_Click(object sender, RoutedEventArgs e)
         {
-            AlgorithmCourse = new AlgorithmCourse(50, FileService.Agglomeration);
+            AlgorithmCourse = new AlgorithmCourse(1000, FileService.Agglomeration);
             AlgorithmCourse.SetAlgorithm(new Greedy());
             AlgorithmCourse.Run();
             var testt = AlgorithmCourse.GetScoreString();
