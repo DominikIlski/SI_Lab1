@@ -10,6 +10,7 @@ namespace Algorytm_Ewolucyjny.Services
     {
 
         Population Population { set; get; }
+
         Algorithm Algorithm { set; get; }
         EvaluationFunction EvaluationFunction { set; get; }
         

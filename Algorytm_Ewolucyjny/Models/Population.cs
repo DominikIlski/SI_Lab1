@@ -45,8 +45,22 @@ namespace Algorytm_Ewolucyjny.Services
 
         }
 
+        public List<List<Town>> CreatGreedyGeneration()
+        {
+            var townList = Agglomeration.GetAgglomeration();
+            var greedyGeneration = new List<List<Town>>();
 
-        
+            for (int i = 0; i < townList.Count; i++)
+            {
+                var townHelper = new List<Town>(townList);
+                townHelper.Swap(0, i);
+                greedyGeneration.Add(townHelper);
+
+
+            }
+            
+            return greedyGeneration;
+        }
 
 
 

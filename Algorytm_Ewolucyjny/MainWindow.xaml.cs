@@ -29,7 +29,7 @@ namespace Algorytm_Ewolucyjny
         {
             InitializeComponent();
             FileService = new FileService();
-            
+            AlgorithmCourse = new AlgorithmCourse(0, new Agglomeration());
 
         }
 
@@ -52,7 +52,7 @@ namespace Algorytm_Ewolucyjny
             AlgorithmCourse.Run();
             var testt = AlgorithmCourse.GetScoreString();
             
-            txtTest.Text = testt;
+            //txtTest.Text = testt;
         }
 
         private void setThemeBlack_Click(object sender, RoutedEventArgs e)

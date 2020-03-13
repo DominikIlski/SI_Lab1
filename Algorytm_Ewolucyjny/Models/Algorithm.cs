@@ -12,6 +12,6 @@ namespace Algorytm_Ewolucyjny.Models
         public double Crossing { protected set; get; }
         public EvaluationFunction EvaluationFunction { protected set; get; }       
         public List<double> FinalScore { protected set; get; }
-        public virtual void Evaluation(EvaluationFunction evaluationFunction, Population population, double Mutation = 0, double Crossing = 0) { }
+        public virtual void Evaluation(EvaluationFunction evaluationFunction, Population population) { }
     }
 }

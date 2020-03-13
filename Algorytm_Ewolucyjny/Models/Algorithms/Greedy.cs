@@ -9,10 +9,10 @@ namespace Algorytm_Ewolucyjny.Models
     class Greedy : Algorithm
     {
 
-        public override void Evaluation(EvaluationFunction evaluationFunction, Population population, double Mutation = 0, double Crossing = 0)
+        public override void Evaluation(EvaluationFunction evaluationFunction, Population population)
         {
             EvaluationFunction = evaluationFunction;
-            Generation = new List<List<Town>>(population.CreatNewGeneration());
+            Generation = new List<List<Town>>(population.CreatGreedyGeneration());
             var query = Generation.AsParallel().Select(x => MakeGreedy(x)).ToList();
             FinalScore = query.Select(x => evaluationFunction.EvaluateSpecimen(x)).ToList();
             FinalScore.Sort();
@@ -54,6 +54,7 @@ namespace Algorytm_Ewolucyjny.Models
             return visitedTowns.ToList();
         }
 
+        
 
     }
 }
