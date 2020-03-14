@@ -17,12 +17,14 @@ namespace Algorytm_Ewolucyjny.Models.Crossings
             var randomNumber1 = Extensions.GenereteRandom();
             var randomNumber2 = Extensions.GenereteRandom();
             
-            var min = (int)Math.Min(randomNumber1, randomNumber2);
-            var max = (int)Math.Max(randomNumber1, randomNumber2);
+            var minH = Math.Min(randomNumber1, randomNumber2);
+            var maxH = Math.Max(randomNumber1, randomNumber2);
 
-            min *= specimenSize;
-            max *= specimenSize;
+            int min = (int) minH * specimenSize;
+            int max = (int) maxH * specimenSize;
 
+            /*min = 2;
+            max = 4;*/
             if (min == max)
             {
                 min = specimenSize / 2;
