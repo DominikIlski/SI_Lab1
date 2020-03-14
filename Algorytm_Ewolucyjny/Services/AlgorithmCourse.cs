@@ -45,7 +45,7 @@ namespace Algorytm_Ewolucyjny.Services
             StringBuilder stringBuilder = new StringBuilder();
             if(WasRunning)
             {
-                var querry = Algorithm.FinalScore.Select((x, Index)=> $"Specimen number: {Index} | scored: {x}").ToArray();
+                var querry = Algorithm.FinalScore.Select((x, Index)=> $"Specimen number: {Index} | scored: {x.BestScore}").ToArray();
                 stringBuilder.AppendJoin('\n', querry);
             }
 

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Przekształcenia_geometryczne"
+        xmlns:local="clr-namespace:Algorytm_Ewolucyjny"
         mc:Ignorable="d"
          Height="600" Width="1200"   Title="Przekształcenia Geometryczne" 
         MinHeight="600" MinWidth="1200" WindowStyle="ThreeDBorderWindow"  Background="#FF292C33" 
@@ -48,7 +48,7 @@
 
                     <StackPanel Margin="0 5 0 0"  >
                         <TextBlock x:Name="xText" Foreground="#FF3E788A" Text="ilosc osobników np. 250" FontWeight="Bold" TextWrapping="Wrap" FontSize="12"  FontFamily="Bradley Hand ITC" />
-                        <TextBox x:Name="scalePointsTextBox"  BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
+                        <TextBox Text="100" x:Name="PopSize"  BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
                     </StackPanel>
 
                     
@@ -60,21 +60,21 @@
 
                 <TextBlock Margin="0 10 0 -10" Foreground="#FFC0C000" Text="Ilosc generacji" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
                 <TextBlock Margin="5" Foreground="#FF3E788A" Text="Ilosc powtórzen algorytmu np. 99" FontWeight="Bold" TextWrapping="Wrap" FontSize="12"  FontFamily="Bradley Hand ITC" />
-                <TextBox   Margin="5 -5" x:Name="rotationTextBox"  Foreground="White" Padding="2" BorderBrush="#FF4B5C81" Background="#FF4B5C81"/>
+                <TextBox Text="100"  Margin="5 -5" x:Name="NumberOfGenerations"  Foreground="White" Padding="2" BorderBrush="#FF4B5C81" Background="#FF4B5C81"/>
                 <Separator Margin="0 10 0 -10" Background="#FFC0C000" />
                 <TextBlock x:Name="vis1" Margin="0 10 0 -10" Foreground="#FFC0C000" Text="Mutacja" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
                 <TextBlock x:Name="vis2" Margin="5" Foreground="#FF3E788A" Text="Prawdopodobienstwo mutacji np 0,3" FontWeight="Bold" TextWrapping="Wrap" FontSize="11"  FontFamily="Bradley Hand ITC" />
-                <TextBox    Margin="5 -5" x:Name="shiftBox" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
+                <TextBox Text="0,1"   Margin="5 -5" x:Name="Pm" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
 
 
 
             </StackPanel>
-            <!-- schowany element_____________________________________________________________________________ -->
+            
             <StackPanel x:Name="transPanel" Margin="0 -15 0 0" Grid.Row="1" Height="96" >
                 <Separator Background="#FFC0C000" />
                 <TextBlock Margin="0 5 0 -5" Foreground="#FFC0C000" Text="Krzyzowanie" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
                 <TextBlock Margin="5" Foreground="#FF3E788A" Text="Prawdopodobienstwo reprodukcji np. 0,6" FontWeight="Bold" TextWrapping="Wrap" FontSize="10"  FontFamily="Bradley Hand ITC" />
-                <TextBox   Margin="5 0 5 5  " Name="combinedTransformationTextBox" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
+                <TextBox  Text="0,7" Margin="5 0 5 5  " Name="Px" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
 
 
 
@@ -82,16 +82,17 @@
                 <Separator Background="#FFC0C000" />
 
             </StackPanel>
-            <!-- schowany element_____________________________________________________________________________ -->
+            
 
             <StackPanel Grid.Row="2" Margin="0,0,0,-89" >
 
 
-                <TextBlock Margin="0 5 0 -5" Foreground="#FFC0C000" Text="Krzyzowanie" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
+                <TextBlock Margin="0 5 0 -5" Foreground="#FFC0C000" Text="Turniej" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
+
+                <TextBox Text="5"  Margin="5 20 5 5" Name="Tour" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
 
 
-
-                <Button  x:Name="TransformationButton" Click="TransformationButton_Click" Margin="0,0,5,0" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E788A">
+                <Button  x:Name="RunAlgorithm" Click="RunAlgorithm_Click" Margin="0,25,5,0" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E788A">
                     
                         
 
@@ -144,7 +145,7 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <Image Grid.Column="0" Source=".//Resources//OpenFolder.png" />
+                        <Image Grid.Column="0" Source=".//Resources/OpenFolder.png" />
 
                         <TextBlock Grid.Column="1" Margin="5" Text="Otwórz plik" VerticalAlignment="Center"  />
 

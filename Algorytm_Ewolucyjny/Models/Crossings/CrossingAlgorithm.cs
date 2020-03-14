@@ -4,7 +4,12 @@ using System.Text;
 
 namespace Algorytm_Ewolucyjny.Models
 {
-    class Mutation
+    class CrossingAlgorithm
     {
+
+
+        public virtual List<Town> Crossover(List<Town> P1, List<Town> P2) { return P2; }
+
+
     }
 }

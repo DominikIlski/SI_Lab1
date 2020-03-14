@@ -27,9 +27,4 @@
     <Resource Include="Resources\SaveAs.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Mutations\" />
-    <Folder Include="Models\Crossings\" />
-  </ItemGroup>
-
 </Project>

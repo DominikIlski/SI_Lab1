@@ -14,8 +14,8 @@ namespace Algorytm_Ewolucyjny.Models
             EvaluationFunction = evaluationFunction;
             Generation = new List<List<Town>>(population.CreatGreedyGeneration());
             var query = Generation.AsParallel().Select(x => MakeGreedy(x)).ToList();
-            FinalScore = query.Select(x => evaluationFunction.EvaluateSpecimen(x)).ToList();
-            FinalScore.Sort();
+            //FinalScore = query.Select(x => evaluationFunction.EvaluateSpecimen(x)).ToList();
+            //FinalScore.Sort();
 
         }
 

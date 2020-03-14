@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Algorytm_Ewolucyjny.Models
 {
-    public static class ListIntExtension
+    public static class Extensions
     {
 
         private static Random rng = new Random();
@@ -28,6 +28,32 @@ namespace Algorytm_Ewolucyjny.Models
             T tmp = list[indexA];
             list[indexA] = list[indexB];
             list[indexB] = tmp;
+        }
+
+
+        public static double GenereteRandom()
+        {
+
+            /*using RNGCryptoServiceProvider rg = new RNGCryptoServiceProvider();
+            
+            byte[] rno = new byte[9];
+            rg.GetBytes(rno);
+            var value = BitConverter.ToDouble(rno, 0);
+            return Math.Abs(value);*/
+
+
+            Random r = new Random();
+            double rDouble = r.NextDouble();
+            return rDouble;
+
+
+        }
+
+        public static List<T> Splice<T>(this List<T> source, int index, int count)
+        {
+            var items = source.GetRange(index, count);
+            source.RemoveRange(index, count);
+            return items;
         }
 
     }

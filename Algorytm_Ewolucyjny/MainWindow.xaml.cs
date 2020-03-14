@@ -1,4 +1,8 @@
 ﻿using Algorytm_Ewolucyjny.Models;
+using Algorytm_Ewolucyjny.Models.Algorithms;
+using Algorytm_Ewolucyjny.Models.Crossings;
+using Algorytm_Ewolucyjny.Models.Mutations;
+using Algorytm_Ewolucyjny.Models.Selections;
 using Algorytm_Ewolucyjny.Services;
 using System;
 using System.Collections.Generic;
@@ -24,40 +28,56 @@ namespace Algorytm_Ewolucyjny
     {
         FileService FileService;
         AlgorithmCourse AlgorithmCourse;
-
+        MutationAlgorithm MutationAlgorithm;
+        CrossingAlgorithm CrossingAlgorithm;
+        SelectionAlgorithm SelectionAlgorithm;
         public MainWindow()
         {
             InitializeComponent();
             FileService = new FileService();
             AlgorithmCourse = new AlgorithmCourse(0, new Agglomeration());
+            MutationAlgorithm = new MutationAlgorithm();
+            CrossingAlgorithm = new CrossingAlgorithm();
+            SelectionAlgorithm = new SelectionAlgorithm();
 
         }
 
-        private void menuOpen_Click(object sender, RoutedEventArgs e)
+        private void OpenFileButton_Click(object sender, RoutedEventArgs e)
         {
 
             FileService.LoadData();
 
         }
 
-        private void menuSave_Click(object sender, RoutedEventArgs e)
+      
+
+      
+
+        private void RunAlgorithm_Click(object sender, RoutedEventArgs e)
         {
 
-        }
+            tester();
 
-        private void setThemeWhite_Click(object sender, RoutedEventArgs e)
-        {
-            AlgorithmCourse = new AlgorithmCourse(1000, FileService.Agglomeration);
-            AlgorithmCourse.SetAlgorithm(new Greedy());
+            AlgorithmCourse = new AlgorithmCourse(ParseInt(PopSize.Text), FileService.Agglomeration);
+            AlgorithmCourse.SetAlgorithm(new Genetic(ParseDouble(Pm.Text), ParseDouble(Px.Text),
+                SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
             AlgorithmCourse.Run();
-            var testt = AlgorithmCourse.GetScoreString();
-            
-            //txtTest.Text = testt;
+            //var testt = AlgorithmCourse.GetScoreString();
+
+
+
         }
 
-        private void setThemeBlack_Click(object sender, RoutedEventArgs e)
+        public void tester()
         {
+            MutationAlgorithm = new Swap();
+            CrossingAlgorithm = new Ordered();
+            SelectionAlgorithm = new Tournament(ParseInt(Tour.Text));
 
         }
+
+        public static int ParseInt(string toParse) => int.Parse(toParse);
+        public static double ParseDouble(string toParse) => double.Parse(toParse);
+
     }
 }
