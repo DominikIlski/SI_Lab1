@@ -39,17 +39,18 @@ namespace Algorytm_Ewolucyjny.Services
             WasRunning = true;
         }
 
-        public string GetScoreString()
+        public List<(double BestScore, double AvarageScore, double WorstScore)> GetScores()
         {
-            
-            StringBuilder stringBuilder = new StringBuilder();
-            if(WasRunning)
-            {
-                var querry = Algorithm.FinalScore.Select((x, Index)=> $"Specimen number: {Index} | scored: {x.BestScore}").ToArray();
-                stringBuilder.AppendJoin('\n', querry);
-            }
 
-            return stringBuilder.ToString();
+            /* StringBuilder stringBuilder = new StringBuilder();
+             if(WasRunning)
+             {
+                 var querry = Algorithm.FinalScore.Select((x, Index)=> $"Specimen number: {Index} | scored: {x.BestScore}").ToArray();
+                 stringBuilder.AppendJoin('\n', querry);
+             }
+
+             return stringBuilder.ToString();*/
+            return Algorithm.FinalScore;
         }
 
        

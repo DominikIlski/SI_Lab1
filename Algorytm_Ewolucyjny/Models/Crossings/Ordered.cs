@@ -23,13 +23,7 @@ namespace Algorytm_Ewolucyjny.Models.Crossings
             int min = (int) minH ;
             int max = (int) maxH ;
 
-            /*min = 2;
-            max = 4;*/
-            if (min == max)
-            {
-                min = specimenSize / 2;
-                max = min+1;
-            }
+            
 
             var germ1 = P1.GetRange(min, max-min);
             var P1indexes = germ1.Select((town) => town.Numer).ToList();

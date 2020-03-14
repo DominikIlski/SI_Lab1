@@ -67,7 +67,7 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
                         O1 = P1;
                     O1 = MutationAlgorithm.Mutate(O1, Pm);
                     
-
+                     
                     newPopulation.Add(O1);
                    
                     var O1Score = EvaluationFunction.EvaluateSpecimen(O1);

@@ -4,6 +4,7 @@ using Algorytm_Ewolucyjny.Models.Crossings;
 using Algorytm_Ewolucyjny.Models.Mutations;
 using Algorytm_Ewolucyjny.Models.Selections;
 using Algorytm_Ewolucyjny.Services;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
+using LiveCharts.Defaults;
 
 namespace Algorytm_Ewolucyjny
 {
@@ -26,6 +30,11 @@ namespace Algorytm_Ewolucyjny
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> Formatter { get; set; }
+
         FileService FileService;
         AlgorithmCourse AlgorithmCourse;
         MutationAlgorithm MutationAlgorithm;
@@ -39,6 +48,59 @@ namespace Algorytm_Ewolucyjny
             MutationAlgorithm = new MutationAlgorithm();
             CrossingAlgorithm = new CrossingAlgorithm();
             SelectionAlgorithm = new SelectionAlgorithm();
+
+
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values = new ChartValues<ObservableValue>
+                    {
+                        new ObservableValue(4),
+                        new ObservableValue(2),
+                        new ObservableValue(8),
+                        new ObservableValue(2),
+                        new ObservableValue(3),
+                        new ObservableValue(0),
+                        new ObservableValue(1),
+                    },
+
+                },
+                 new LineSeries
+                {
+                    Values = new ChartValues<ObservableValue>
+                    {
+                        new ObservableValue(4),
+                        new ObservableValue(2),
+                        new ObservableValue(8),
+                        new ObservableValue(2),
+                        new ObservableValue(3),
+                        new ObservableValue(0),
+                        new ObservableValue(1),
+                    },
+
+                },
+                  new LineSeries
+                {
+                    Values = new ChartValues<ObservableValue>
+                    {
+                        new ObservableValue(4),
+                        new ObservableValue(2),
+                        new ObservableValue(8),
+                        new ObservableValue(2),
+                        new ObservableValue(3),
+                        new ObservableValue(0),
+                        new ObservableValue(1),
+                    },
+
+                }
+            };
+           
+
+            Formatter = value => value +" ";
+
+            DataContext = this;
+
 
         }
 
@@ -56,13 +118,25 @@ namespace Algorytm_Ewolucyjny
         private void RunAlgorithm_Click(object sender, RoutedEventArgs e)
         {
 
+
+            
+           
+
+            
+
             tester();
 
             AlgorithmCourse = new AlgorithmCourse(ParseInt(PopSize.Text), FileService.Agglomeration);
             AlgorithmCourse.SetAlgorithm(new Genetic(ParseDouble(Pm.Text), ParseDouble(Px.Text),
                 SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
             AlgorithmCourse.Run();
-            //var testt = AlgorithmCourse.GetScoreString();
+            var finalScores = AlgorithmCourse.GetScores();
+
+            InitializeChart(finalScores);
+
+            //ViewModel viewModel = new ViewModel(finalScores);
+
+            //this.DataContext = viewModel;
 
 
 
@@ -73,6 +147,47 @@ namespace Algorytm_Ewolucyjny
             MutationAlgorithm = new Swap();
             CrossingAlgorithm = new Ordered();
             SelectionAlgorithm = new Tournament(ParseInt(Tour.Text));
+
+        }
+
+        private void InitializeChart(List<(double BestScore, double AvarageScore, double WorstScore)> scores)
+        {
+
+            SeriesCollection.Clear();
+
+            var r = new Random();
+            var seriesBest = new LineSeries();
+            var seriesAvg = new LineSeries();
+            var seriesWorst = new LineSeries();
+
+
+            seriesBest.Fill = System.Windows.Media.Brushes.Transparent;
+            seriesAvg.Fill = System.Windows.Media.Brushes.Transparent;
+            seriesWorst.Fill = System.Windows.Media.Brushes.Transparent;
+
+            seriesBest.Title = "Best value";
+            seriesAvg.Title = "Avarage value";
+            seriesWorst.Title = "Worst value";
+            seriesAvg.Values = new ChartValues<ObservableValue>();
+            seriesBest.Values = new ChartValues<ObservableValue>();
+            seriesWorst.Values = new ChartValues<ObservableValue>();
+
+
+            SeriesCollection.Add(seriesBest);
+            SeriesCollection.Add(seriesAvg);
+            SeriesCollection.Add(seriesWorst);
+
+
+            foreach (var specimen in scores)
+           {
+
+                seriesBest.Values.Add(new ObservableValue(specimen.BestScore));
+                seriesAvg.Values.Add(new ObservableValue(specimen.AvarageScore));
+                seriesWorst.Values.Add(new ObservableValue(specimen.WorstScore));
+
+
+           }
+
 
         }
 

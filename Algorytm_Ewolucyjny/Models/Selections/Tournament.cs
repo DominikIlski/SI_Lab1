@@ -23,20 +23,24 @@ namespace Algorytm_Ewolucyjny.Models.Selections
         {
 
             var participants = new List<(List<Town> Specimen, double Score)>();
-            double randomNumber = 0;
-
+            
+            List<Town> bestParticipant = new List<Town>(list[0]);
+            var score = Double.MaxValue;
             for(int i = 0; i< ParticipantsNumber; i++)
             {
-                randomNumber = Extensions.GenereteRandom() * list.Count;
+                var randomNumber = Extensions.GenereteRandom() * list.Count;
                 var parseHelper = (int)Math.Floor(randomNumber);
-                var participant = list[parseHelper];
-                var score = EvaluationFunction.EvaluateSpecimen(participant);
-                var tuple = (participant, score);
+                var scoreHelper = EvaluationFunction.EvaluateSpecimen(list[parseHelper]);
+                if(scoreHelper < score)
+                {
+                    bestParticipant = new List<Town>(list[parseHelper]);
+                    score = scoreHelper;
+                }
 
-                participants.Add(tuple);
+
             }
 
-            var bestParticipant = BestParticipant(participants);
+            
 
             return bestParticipant;
         }
@@ -44,7 +48,7 @@ namespace Algorytm_Ewolucyjny.Models.Selections
 
         public List<Town> BestParticipant(List<(List<Town> Specimen, double Score)> participants)
         {
-            participants.Sort((x, y) => y.Score.CompareTo(x.Score));
+            
 
 
             

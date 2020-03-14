@@ -3,15 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Algorytm_Ewolucyjny"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        
+        xmlns:local="clr-namespace:Algorytm_Ewolucyjny.Services"
         mc:Ignorable="d"
          Height="600" Width="1200"   Title="Przekształcenia Geometryczne" 
         MinHeight="600" MinWidth="1200" WindowStyle="ThreeDBorderWindow"  Background="#FF292C33" 
         BorderBrush="#FF292C33" BorderThickness="0" FontFamily="Century Gothic" 
-        OpacityMask="#FF292C33" WindowStartupLocation="CenterScreen">
+        OpacityMask="#FF292C33">
 
 
-
+    <Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>
 
 
 
@@ -185,22 +189,36 @@
 
             </ToolBar>
 
-
+            <lvc:CartesianChart Grid.Row="1" Series="{Binding SeriesCollection}" 
+                           >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis LabelsRotation="20" Labels="{Binding Labels}" Position="LeftBottom" >
+                        <lvc:Axis.Separator >
+                            <lvc:Separator Step="1"></lvc:Separator>
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Sold Items" LabelFormatter="{Binding Formatter}" Position="RightTop"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+            <!-- 
             <DockPanel Grid.Row="1" LastChildFill="True">
 
-                <ScrollViewer Background="#FF292C33"  HorizontalScrollBarVisibility="Visible" Foreground="#FF4B5C81" CanContentScroll="True" ClipToBounds="True" VerticalContentAlignment="Stretch" >
+                <ScrollViewer Background="#FFFFFF"  HorizontalScrollBarVisibility="Visible" Foreground="#FF4B5C81" CanContentScroll="True" ClipToBounds="True" VerticalContentAlignment="Stretch" >
 
 
 
 
-                    <!-- Canvas Part-->
+                   
 
 
                     <Grid >
-                        <DockPanel x:Name="canvasDockPanel"  Height="2000" Width="2000">
+                        <DockPanel x:Name="ChartDockPanel"  Height="500" Width="900">
 
                             <Border BorderBrush="#FFC0C000" BorderThickness="3"/>
 
+                            
 
                         </DockPanel>
                         <Image Canvas.Top="1"  Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="imageView" Visibility="Visible"   Width="Auto" />
@@ -221,7 +239,7 @@
 
             </DockPanel>
 
-
+Canvas Part-->
         </Grid>
 
 

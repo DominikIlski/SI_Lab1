@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Chart.js" Version="2.9.3" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Syncfusion.SfChart.WPF" Version="17.4.0.55" />
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
   </ItemGroup>
