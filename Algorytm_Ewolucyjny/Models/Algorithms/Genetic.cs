@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Algorytm_Ewolucyjny.Models.Algorithms
 {
@@ -45,8 +46,9 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
             var finalScoreList = new List<(double BestScore, double AvarageScore, double WorstScore)>();
             double BestScore;
             double WorstScore;
-            var ScoreList = new HashSet<double>();
+            var ScoreList = new List<double>();
             double AvarageScore;
+            List<Town> selectedBest = new List<Town>(generation.Count);
             while (NumberOfGenerations>0)
             {
                 BestScore = Double.MaxValue;
@@ -84,8 +86,9 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
                 }
                 generation = new List<List<Town>>(newPopulation);
                 AvarageScore = Queryable.Average(ScoreList.AsQueryable());
-                finalScoreList.Add((BestScore, AvarageScore,WorstScore));
+                finalScoreList.Add((BestScore, AvarageScore, WorstScore));
                 newPopulation.Clear();
+                ScoreList.Clear();
                 NumberOfGenerations--;
             }
 

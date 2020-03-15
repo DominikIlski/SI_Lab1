@@ -32,7 +32,7 @@ namespace Algorytm_Ewolucyjny
     {
 
         public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
+        public int[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
 
         FileService FileService;
@@ -95,7 +95,8 @@ namespace Algorytm_Ewolucyjny
 
                 }
             };
-           
+
+
 
             Formatter = value => value +" ";
 
@@ -162,6 +163,7 @@ namespace Algorytm_Ewolucyjny
 
 
             seriesBest.Fill = System.Windows.Media.Brushes.Transparent;
+            
             seriesAvg.Fill = System.Windows.Media.Brushes.Transparent;
             seriesWorst.Fill = System.Windows.Media.Brushes.Transparent;
 
@@ -172,21 +174,32 @@ namespace Algorytm_Ewolucyjny
             seriesBest.Values = new ChartValues<ObservableValue>();
             seriesWorst.Values = new ChartValues<ObservableValue>();
 
-
-            SeriesCollection.Add(seriesBest);
-            SeriesCollection.Add(seriesAvg);
             SeriesCollection.Add(seriesWorst);
+            SeriesCollection.Add(seriesAvg);
+            SeriesCollection.Add(seriesBest);
+            
 
 
             foreach (var specimen in scores)
-           {
+            {
 
                 seriesBest.Values.Add(new ObservableValue(specimen.BestScore));
                 seriesAvg.Values.Add(new ObservableValue(specimen.AvarageScore));
                 seriesWorst.Values.Add(new ObservableValue(specimen.WorstScore));
 
 
-           }
+            }
+
+            
+
+            Labels = new int[20];
+
+
+            Labels[0] = ParseInt(PopSize.Text) / 20;
+            for (int i = 0; i < 19; i++)
+            {
+                Labels[i + 1] = Labels[i] + Labels[0];
+            }
 
 
         }
