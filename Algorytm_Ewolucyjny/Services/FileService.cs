@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Algorytm_Ewolucyjny.Models;
 using Microsoft.Win32;
@@ -74,6 +75,41 @@ namespace Algorytm_Ewolucyjny.Services
            
         }
 
+
+
+        public void SaveFile(List<(double BestScore, double AvarageScore, double WorstScore)> Scores)
+        {
+            // Displays a SaveFileDialog so the user can save the Image
+            // assigned to Button2.
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Zapisz wyniki algorytmu";
+            saveFileDialog.ShowDialog();
+
+            // If the file name is not an empty string open it for saving.
+            if (saveFileDialog.FileName != "")
+            {
+                // Saves the Image via a FileStream created by the OpenFile method.
+                using Stream fs = saveFileDialog.OpenFile();
+
+                using StreamWriter streamWriter = new StreamWriter(fs);
+
+                // Saves the Image in the appropriate ImageFormat based upon the
+                // File type selected in the dialog box.
+                // NOTE that the FilterIndex property is one-based.
+
+
+
+                streamWriter.WriteLine(ScoresString(Scores));
+
+                //File.WriteAllText(saveFileDialog.FileName, ddd);
+
+
+
+
+            }
+        }
+
+
         #region privateMethods
 
         private string GetName(string name) => name.Split(": ")[1];
@@ -85,6 +121,22 @@ namespace Algorytm_Ewolucyjny.Services
         private int GetDimension(string dimension) => int.Parse(dimension.Split(": ")[1]);
         
         private string GetEdgeWeightType(string weighType) => weighType.Split(": ")[1];
+
+
+        private string ScoresString(List<(double BestScore, double AvarageScore, double WorstScore)> socres)
+        {
+
+
+            StringBuilder st = new StringBuilder();
+
+            var querry = socres.Select((x, Index) => $"{Index}; {x.BestScore}; {x.AvarageScore}; {x.WorstScore};;;").ToArray();
+
+            var scores = String.Join('\n', querry);
+
+
+            return scores;
+        }
+
 
         private TownType EstimateTownType(string townType)
         {
@@ -123,6 +175,8 @@ namespace Algorytm_Ewolucyjny.Services
 
             return towns;
         }
+
+
 
         #endregion
     }

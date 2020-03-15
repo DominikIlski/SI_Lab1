@@ -7,7 +7,7 @@
         
         xmlns:local="clr-namespace:Algorytm_Ewolucyjny.Services"
         mc:Ignorable="d"
-         Height="600" Width="1200"   Title="Przekształcenia Geometryczne" 
+         Height="600" Width="1200"   Title="Algorytmy ewolucyjne" 
         MinHeight="600" MinWidth="1200" WindowStyle="ThreeDBorderWindow"  Background="#FF292C33" 
         BorderBrush="#FF292C33" BorderThickness="0" FontFamily="Century Gothic" 
         OpacityMask="#FF292C33">
@@ -30,15 +30,27 @@
                 <!--188,333333333333-->
                 <!--120,342222222222-->
                 <!--72,6711111111112-->
-                <RowDefinition Height="302"/>
-                <RowDefinition Height="93"/>
+                <RowDefinition Height="277"/>
+                <RowDefinition Height="118"/>
                 <RowDefinition Height="75"/>
             </Grid.RowDefinitions>
 
 
-            <StackPanel x:Name="transformationForm" Grid.Row="0">
-                <Border CornerRadius="10" BorderThickness="10" BorderBrush="#FFC0C000" Background="#FFC0C000">
-                    <TextBlock  Background="#FFC0C000" Foreground="#FF3E788A" Text="Algorytmy Ewolucyjne " HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold" TextWrapping="Wrap" FontSize="23" Height="68" FontFamily="Bradley Hand ITC"   />
+            <StackPanel x:Name="transformationForm" Grid.Row="0" RenderTransformOrigin="0.5,0.5" Margin="-2,0,2,11">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.175"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Border   CornerRadius="10" BorderThickness="10"   BorderBrush="#FFC0C000" Height="68" Background="#FFC0C000" OpacityMask="#FFDC0F0F" >
+                    <Viewbox >
+                        <TextBlock  Foreground="#FF3E788A" Text="Algorytmy Ewolucyjne " HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" TextWrapping="Wrap"  FontFamily="Bradley Hand ITC"   />
+                    </Viewbox>
+                    
+                        
                 </Border>
                 <TextBlock Margin="0 5 0 0" Foreground="#FFC0C000" Text="Populacja" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
 
@@ -46,19 +58,19 @@
 
                 <Grid Margin="0 -10 0 -5" >
                     <Grid.ColumnDefinitions>
-                        
+
 
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Margin="0 5 0 0"  >
-                        <TextBlock x:Name="xText" Foreground="#FF3E788A" Text="ilosc osobników np. 250" FontWeight="Bold" TextWrapping="Wrap" FontSize="12"  FontFamily="Bradley Hand ITC" />
-                        <TextBox Text="100" x:Name="PopSize"  BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
+                        <TextBlock x:Name="xText"  Foreground="#FF3E788A" Text="ilosc osobników np. 250" FontWeight="Bold" TextWrapping="Wrap" FontSize="12"  FontFamily="Bradley Hand ITC" />
+                        <TextBox Text="100" x:Name="PopSize" Margin="5 5 5 -5"  BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
                     </StackPanel>
 
-                    
+
 
                 </Grid>
-                <Separator Margin="0 10 0 -10" Background="#FFC0C000" />
+                <Separator Margin="0 15 0 -10" Background="#FFC0C000" />
 
                 <!-- Mutacja -->
 
@@ -73,8 +85,8 @@
 
 
             </StackPanel>
-            
-            <StackPanel x:Name="transPanel" Margin="0 -15 0 0" Grid.Row="1" Height="96" >
+
+            <StackPanel x:Name="transPanel" Margin="0,0,0,5" Grid.Row="1" >
                 <Separator Background="#FFC0C000" />
                 <TextBlock Margin="0 5 0 -5" Foreground="#FFC0C000" Text="Krzyzowanie" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
                 <TextBlock Margin="5" Foreground="#FF3E788A" Text="Prawdopodobienstwo reprodukcji np. 0,6" FontWeight="Bold" TextWrapping="Wrap" FontSize="10"  FontFamily="Bradley Hand ITC" />
@@ -86,7 +98,7 @@
                 <Separator Background="#FFC0C000" />
 
             </StackPanel>
-            
+
 
             <StackPanel Grid.Row="2" Margin="0,0,0,-89" >
 
@@ -97,20 +109,20 @@
 
 
                 <Button  x:Name="RunAlgorithm" Click="RunAlgorithm_Click" Margin="0,25,5,0" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E788A">
-                    
-                        
 
 
-                        <TextBlock VerticalAlignment="Center" FontSize="15" Grid.Column="1" Text="Uruchom"/>
 
 
-                    
+                    <TextBlock VerticalAlignment="Center" FontSize="15" Grid.Column="1" Text="Uruchom"/>
+
+
+
 
                 </Button>
 
 
 
-                
+
 
 
 
@@ -160,7 +172,7 @@
 
                 <Separator/>
 
-                <Button Margin=" 5 0 5 0"  x:Name="saveFileButton" ToolTip="Save File" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button Margin=" 5 0 5 0"  x:Name="saveFileButton" ToolTip="Save File" BorderBrush="{x:Null}" Background="{x:Null}" Click="saveFileButton_Click" >
 
                     <Grid>
 
@@ -174,16 +186,16 @@
 
                         <Image Grid.Column="0" Source=".//Resources/Save.png" />
 
-                        <TextBlock Grid.Column="1" Margin="5" Text="Zapisz plik" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Margin="5" Text="Zapisz plik"  VerticalAlignment="Center"/>
 
                     </Grid>
                 </Button>
 
                 <Separator/>
 
-                
 
-                
+
+
 
 
 
@@ -199,7 +211,7 @@
                     </lvc:Axis>
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Sold Items" LabelFormatter="{Binding Formatter}" Position="RightTop"></lvc:Axis>
+                    <lvc:Axis LabelFormatter="{Binding Formatter}" Position="RightTop"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
             <!-- 

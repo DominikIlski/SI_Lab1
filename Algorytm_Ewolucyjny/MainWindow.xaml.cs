@@ -22,6 +22,8 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Algorytm_Ewolucyjny
 {
@@ -32,9 +34,9 @@ namespace Algorytm_Ewolucyjny
     {
 
         public SeriesCollection SeriesCollection { get; set; }
-        public int[] Labels { get; set; }
+        
         public Func<double, string> Formatter { get; set; }
-
+        public List<(double BestScore, double AvarageScore, double WorstScore)> Scores;
         FileService FileService;
         AlgorithmCourse AlgorithmCourse;
         MutationAlgorithm MutationAlgorithm;
@@ -48,7 +50,7 @@ namespace Algorytm_Ewolucyjny
             MutationAlgorithm = new MutationAlgorithm();
             CrossingAlgorithm = new CrossingAlgorithm();
             SelectionAlgorithm = new SelectionAlgorithm();
-
+            Scores = new List<(double BestScore, double AvarageScore, double WorstScore)>();
 
             SeriesCollection = new SeriesCollection
             {
@@ -132,14 +134,8 @@ namespace Algorytm_Ewolucyjny
                 SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
             AlgorithmCourse.Run();
             var finalScores = AlgorithmCourse.GetScores();
-
+            Scores = finalScores;
             InitializeChart(finalScores);
-
-            //ViewModel viewModel = new ViewModel(finalScores);
-
-            //this.DataContext = viewModel;
-
-
 
         }
 
@@ -177,9 +173,16 @@ namespace Algorytm_Ewolucyjny
             SeriesCollection.Add(seriesWorst);
             SeriesCollection.Add(seriesAvg);
             SeriesCollection.Add(seriesBest);
+
             
+            /*var BestScores = scores.AsParallel().Select((score) => new ObservableValue(score.BestScore)).ToList();
+            var AvgScores = scores.AsParallel().Select((score) => new ObservableValue(score.AvarageScore)).ToList();
+            var WorstScores = scores.AsParallel().Select((score) => new ObservableValue(score.WorstScore)).ToList();
 
-
+            seriesBest.Values.AddRange(BestScores);
+            seriesAvg.Values.AddRange(AvgScores);
+            seriesWorst.Values.AddRange(WorstScores);
+            */
             foreach (var specimen in scores)
             {
 
@@ -189,17 +192,10 @@ namespace Algorytm_Ewolucyjny
 
 
             }
-
+            
             
 
-            Labels = new int[20];
-
-
-            Labels[0] = ParseInt(PopSize.Text) / 20;
-            for (int i = 0; i < 19; i++)
-            {
-                Labels[i + 1] = Labels[i] + Labels[0];
-            }
+          
 
 
         }
@@ -207,5 +203,13 @@ namespace Algorytm_Ewolucyjny
         public static int ParseInt(string toParse) => int.Parse(toParse);
         public static double ParseDouble(string toParse) => double.Parse(toParse);
 
+        private void saveFileButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            FileService.SaveFile(Scores);
+
+        }
+
+       
     }
 }
