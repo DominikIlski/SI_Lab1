@@ -83,8 +83,10 @@ namespace Algorytm_Ewolucyjny.Services
             // assigned to Button2.
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Zapisz wyniki algorytmu";
+            saveFileDialog.FileName = "wyniki_algorytmu";
+            saveFileDialog.DefaultExt = "csv";
+            saveFileDialog.AddExtension = true;
             saveFileDialog.ShowDialog();
-
             // If the file name is not an empty string open it for saving.
             if (saveFileDialog.FileName != "")
             {
@@ -129,12 +131,14 @@ namespace Algorytm_Ewolucyjny.Services
 
             StringBuilder st = new StringBuilder();
 
-            var querry = socres.Select((x, Index) => $"{Index}; {x.BestScore}; {x.AvarageScore}; {x.WorstScore};;;").ToArray();
+            var scoreStringList = socres.Select((x, Index) => $"{Index}; {x.BestScore}; {x.AvarageScore}; {x.WorstScore};;;").ToArray();
 
-            var scores = String.Join('\n', querry);
+            
+
+            var scoresString = "Generation;Best Score;Avarage Score;Worst Score;;;\n" + String.Join('\n', scoreStringList);
 
 
-            return scores;
+            return scoresString;
         }
 
 

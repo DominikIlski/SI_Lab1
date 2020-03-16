@@ -120,10 +120,7 @@ namespace Algorytm_Ewolucyjny
 
         private void RunAlgorithm_Click(object sender, RoutedEventArgs e)
         {
-
-
-            
-           
+         
 
             
 
