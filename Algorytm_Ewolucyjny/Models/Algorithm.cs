@@ -7,7 +7,7 @@ namespace Algorytm_Ewolucyjny.Models
 {
     class Algorithm
     {
-        public List<List<Town>> Generation {protected set; get; }
+        public List<(List<Town> geneticCode , double? score)> Generation {protected set; get; }
         public double Pm { protected set; get; }
         public double Px { protected set; get; }
         public EvaluationFunction EvaluationFunction { protected set; get; }       

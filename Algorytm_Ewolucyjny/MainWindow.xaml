@@ -13,10 +13,7 @@
         OpacityMask="#FF292C33">
 
 
-    <Window.DataContext>
-        <local:ViewModel/>
-    </Window.DataContext>
-
+    
 
 
     <Grid Margin="10 5 0 0 ">
@@ -100,15 +97,23 @@
             </StackPanel>
 
 
-            <StackPanel Grid.Row="2" Margin="0,0,0,-89" >
+            <StackPanel Grid.Row="2" Margin="0,-35,0,-89" >
+
+                
+                
+                <TextBlock Margin="0 5 0 -5" Foreground="#FFC0C000" Text="Selekcja" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
+
+                <RadioButton IsChecked="True" x:Name="Turniej" GroupName="Selekcja" Content="Turniej" Foreground="#FF3E788A" FontFamily="Bradley Hand ITC" FontWeight="Bold" FontSize="20"/>
 
 
-                <TextBlock Margin="0 5 0 -5" Foreground="#FFC0C000" Text="Turniej" FontWeight="Bold" TextWrapping="Wrap" FontSize="24"  FontFamily="Bradley Hand ITC" />
+                <RadioButton x:Name="Ruletka" GroupName="Selekcja" Content="Ruletka" Foreground="#FF3E788A" FontFamily="Bradley Hand ITC" FontWeight="Bold" FontSize="20"/>
 
-                <TextBox Text="5"  Margin="5 20 5 5" Name="Tour" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
+                <TextBox Text="5"  Margin="5 0 5 5" Name="Tour" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
+                <TextBlock Margin="5" Foreground="#FF3E788A" Text="Ilosc wywołan" FontWeight="Bold" TextWrapping="Wrap" FontSize="15"  FontFamily="Bradley Hand ITC" />
+                <TextBox Text="1"  Margin="5 0 0 0" Name="NumberOfCals" BorderBrush="#FF4B5C81" Foreground="White" Padding="2"  Background="#FF4B5C81"/>
 
 
-                <Button  x:Name="RunAlgorithm" Click="RunAlgorithm_Click" Margin="0,25,5,0" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E788A">
+                <Button  x:Name="RunAlgorithm" Click="RunAlgorithm_Click" Margin="0,0,0,0" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E788A">
 
 
 
@@ -119,6 +124,7 @@
 
 
                 </Button>
+                
 
 
 

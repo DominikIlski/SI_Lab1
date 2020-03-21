@@ -12,48 +12,48 @@ namespace Algorytm_Ewolucyjny.Services
         public int PopSize { set; get; }
 
         Agglomeration Agglomeration { set; get; }
-        
 
-        public Population(int popSize, Agglomeration agglomeration)
+        EvaluationFunction EvaluationFunction;
+
+        public Population(int popSize, Agglomeration agglomeration, EvaluationFunction evaluationFunction)
         {
             PopSize = popSize;
             Agglomeration = agglomeration;
+            EvaluationFunction = evaluationFunction;
             
         }
 
 
         
 
-        public List<List<Town>> CreatNewGeneration()
+        public List<(List<Town> geneticCode , double? score)> CreatNewGeneration()
         {
             
             var specimenElement = Agglomeration.GetAgglomeration();
-            var generation = new List<List<Town>>();
+            var generation = new List<(List<Town> geneticCode, double? score)>();
             
             for (int i = 0; i < PopSize; i++)
             {
-                generation.Add(new List<Town>(specimenElement));
-            }
-            foreach (var specimen in generation)
-            {
+                generation.Add((new List<Town>(specimenElement), null));
+                generation[i].geneticCode.Shuffle();
+                generation[i] = (generation[i].geneticCode, EvaluationFunction.EvaluateSpecimen(generation[i].geneticCode));
 
-                specimen.Shuffle();
 
             }
-
+           
             return generation;
 
         }
 
-        public List<List<Town>> CreatGreedyGeneration()
+        public List<(List<Town> geneticCode , double? score)> CreatGreedyGeneration()
         {
             var townList = Agglomeration.GetAgglomeration();
-            var greedyGeneration = new List<List<Town>>();
+            var greedyGeneration = new List(<Town> geneticCode , double? score)>();
 
             for (int i = 0; i < townList.Count; i++)
             {
-                var townHelper = new List<Town>(townList);
-                townHelper.Swap(0, i);
+                var townHelper = new(List<Town> geneticCode , double? score)(townList);
+                townHelper.geneticCode.Swap(0, i);
                 greedyGeneration.Add(townHelper);
 
 

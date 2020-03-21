@@ -8,7 +8,7 @@ namespace Algorytm_Ewolucyjny.Models
     {
 
 
-        public virtual List<Town> Mutate(List<Town> specimen, double Pm) { return specimen; }
+        public virtual(List<Town> geneticCode , double? score) Mutate(List<Town> specimen, double Pm) { return specimen; }
 
     }
 }

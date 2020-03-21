@@ -8,14 +8,14 @@ namespace Algorytm_Ewolucyjny.Models.Mutations
     {
 
 
-        public override List<Town> Mutate(List<Town> specimen, double Pm)
+        public override(List<Town> geneticCode , double? score) Mutate(List<Town> specimen, double Pm)
         {
             var random1 = Extensions.GenereteRandom();
             var random2 = Extensions.GenereteRandom();
             var newSpecimen = specimen;
             if(random1 < Pm)
             {
-                newSpecimen = new List<Town>(specimen);
+                newSpecimen = new(List<Town> geneticCode , double? score)(specimen);
 
                 random1 *= specimen.Count;
                 random2 *= specimen.Count;

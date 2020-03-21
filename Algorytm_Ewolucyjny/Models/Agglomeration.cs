@@ -17,7 +17,7 @@ namespace Algorytm_Ewolucyjny.Models
         public List<Town> Towns { private set; get; }
 
         public Agglomeration(string name, string type, string comment, int dimension, 
-                             TownType edgeWeightType, string displayDataType, List<Town> towns)
+                             TownType edgeWeightType, string displayDataType,List<Town> towns)
         {
             Name = name;
             Type = type;

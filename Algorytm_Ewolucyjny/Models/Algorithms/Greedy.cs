@@ -12,14 +12,14 @@ namespace Algorytm_Ewolucyjny.Models
         public override void Evaluation(EvaluationFunction evaluationFunction, Population population)
         {
             EvaluationFunction = evaluationFunction;
-            Generation = new List<List<Town>>(population.CreatGreedyGeneration());
+            Generation = new List<(List<Town> geneticCode , double? score)>(population.CreatGreedyGeneration());
             var query = Generation.AsParallel().Select(x => MakeGreedy(x)).ToList();
             //FinalScore = query.Select(x => evaluationFunction.EvaluateSpecimen(x)).ToList();
             //FinalScore.Sort();
 
         }
 
-        private List<Town> MakeGreedy(List<Town> specimen)
+        private(List<Town> geneticCode , double? score) MakeGreedy(List<Town> specimen)
         {
             var startingTown = specimen[0];
             var visitedTowns = new HashSet<Town>

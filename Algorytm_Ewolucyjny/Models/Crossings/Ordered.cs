@@ -8,7 +8,7 @@ namespace Algorytm_Ewolucyjny.Models.Crossings
     class Ordered : CrossingAlgorithm
     {
 
-        public override List<Town> Crossover(List<Town> P1, List<Town> P2) 
+        public override(List<Town> geneticCode , double? score) Crossover(List<Town> P1,(List<Town> geneticCode , double? score) P2) 
         {
 
             var specimenSize = P1.Count;

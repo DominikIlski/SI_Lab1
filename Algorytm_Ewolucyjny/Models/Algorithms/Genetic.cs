@@ -33,22 +33,22 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
 
             EvaluationFunction = evaluationFunction;
             SelectionAlgorithm.EvaluationFunction = EvaluationFunction;
-            Generation = new List<List<Town>>(population.CreatNewGeneration());
+            Generation = new List<(List<Town> geneticCode , double? score)>(population.CreatNewGeneration());
             Scores = MakeGenetic(Generation);
             FinalScore = Scores;
 
         }
 
 
-        public List<(double BestScore, double AvarageScore, double WorstScore)> MakeGenetic(List<List<Town>> generation)
+        public List<(double BestScore, double AvarageScore, double WorstScore)> MakeGenetic(List<(List<Town> geneticCode , double? score)> generation)
         {
-            var newPopulation = new List<List<Town>>();
+            var newPopulation = new List<(List<Town> geneticCode , double? score)>();
             var finalScoreList = new List<(double BestScore, double AvarageScore, double WorstScore)>();
             double BestScore;
             double WorstScore;
             var ScoreList = new List<double>();
             double AvarageScore;
-            List<Town> selectedBest = new List<Town>(generation.Count);
+         
             while (NumberOfGenerations>0)
             {
                 BestScore = Double.MaxValue;
@@ -59,7 +59,7 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
 
                     var P1 = SelectionAlgorithm.Selection(generation);
                     var P2 = SelectionAlgorithm.Selection(generation);
-                    List<Town> O1;
+                   (List<Town> geneticCode , double? score) O1;
                     
                     double randomNumber = Extensions.GenereteRandom();
 
@@ -84,7 +84,7 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
                     
 
                 }
-                generation = new List<List<Town>>(newPopulation);
+                generation = new List<(List<Town> geneticCode , double? score)>(newPopulation);
                 AvarageScore = Queryable.Average(ScoreList.AsQueryable());
                 finalScoreList.Add((BestScore, AvarageScore, WorstScore));
                 newPopulation.Clear();

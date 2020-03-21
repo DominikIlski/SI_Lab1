@@ -17,8 +17,8 @@ namespace Algorytm_Ewolucyjny.Models
             {
                 n--;
                 int k = rng.Next(n + 1);
-                Town value = (Town)list[k].Clone();
-                list[k] = (Town)list[n].Clone();
+                Town value = list[k];
+                list[k] = list[n];
                 list[n] = value;
             }
         }

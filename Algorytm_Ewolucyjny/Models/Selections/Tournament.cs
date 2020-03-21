@@ -7,33 +7,23 @@ namespace Algorytm_Ewolucyjny.Models.Selections
 {
     class Tournament : SelectionAlgorithm
     {
-        readonly int  ParticipantsNumber;
-        
-        public Tournament(int participantsNumber)
-        {
+      
 
-            ParticipantsNumber = participantsNumber;
-            
-
-        }
-
-        
-
-        public override List<Town> Selection(List<List<Town>> list)
+        public override(List<Town> geneticCode , double? score) Selection(List<(List<Town> geneticCode , double? score)> list)
         {
 
             var participants = new List<(List<Town> Specimen, double Score)>();
             
-            List<Town> bestParticipant = new List<Town>(list[0]);
+           (List<Town> geneticCode , double? score) bestParticipant = new(List<Town> geneticCode , double? score)(list[0]);
             var score = Double.MaxValue;
-            for(int i = 0; i< ParticipantsNumber; i++)
+            for(int i = 0; i< list.Count; i++)
             {
                 var randomNumber = Extensions.GenereteRandom() * list.Count;
                 var parseHelper = (int)Math.Floor(randomNumber);
                 var scoreHelper = EvaluationFunction.EvaluateSpecimen(list[parseHelper]);
                 if(scoreHelper < score)
                 {
-                    bestParticipant = new List<Town>(list[parseHelper]);
+                    bestParticipant = new(List<Town> geneticCode , double? score)(list[parseHelper]);
                     score = scoreHelper;
                 }
 
@@ -46,7 +36,7 @@ namespace Algorytm_Ewolucyjny.Models.Selections
         }
 
 
-        public List<Town> BestParticipant(List<(List<Town> Specimen, double Score)> participants)
+        private(List<Town> geneticCode , double? score) BestParticipant(List<(List<Town> Specimen, double Score)> participants)
         {
             
 

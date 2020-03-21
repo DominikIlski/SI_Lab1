@@ -124,15 +124,28 @@ namespace Algorytm_Ewolucyjny
 
             
 
-            tester();
+            
 
-            AlgorithmCourse = new AlgorithmCourse(ParseInt(PopSize.Text), FileService.Agglomeration);
-            AlgorithmCourse.SetAlgorithm(new Genetic(ParseDouble(Pm.Text), ParseDouble(Px.Text),
-                SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
-            AlgorithmCourse.Run();
-            var finalScores = AlgorithmCourse.GetScores();
-            Scores = finalScores;
-            InitializeChart(finalScores);
+            var iterationsData = new List<(double BestScore, double AvarageScore, double WorstScore)>();
+
+            var numberOfCals = ParseInt(NumberOfCals.Text);
+
+            for (int i = 0; i < numberOfCals; i++)
+            {
+                tester();
+
+                AlgorithmCourse = new AlgorithmCourse(ParseInt(PopSize.Text), FileService.Agglomeration);
+                AlgorithmCourse.SetAlgorithm(new Genetic(ParseDouble(Pm.Text), ParseDouble(Px.Text),
+                    SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
+
+                AlgorithmCourse.Run();
+                var finalScores = AlgorithmCourse.GetScores();
+                Scores = finalScores;
+                InitializeChart(finalScores);
+                iterationsData.Add(finalScores[finalScores.Count-1]);
+            }
+
+            if (numberOfCals > 1) Scores = iterationsData;
 
         }
 
@@ -140,7 +153,16 @@ namespace Algorytm_Ewolucyjny
         {
             MutationAlgorithm = new Swap();
             CrossingAlgorithm = new Ordered();
-            SelectionAlgorithm = new Tournament(ParseInt(Tour.Text));
+            if (Turniej.IsChecked.Value)
+            {
+                SelectionAlgorithm = new Tournament();
+            }
+            else
+            {
+                SelectionAlgorithm = new Roulette();
+            }
+
+            
 
         }
 
@@ -172,14 +194,7 @@ namespace Algorytm_Ewolucyjny
             SeriesCollection.Add(seriesBest);
 
             
-            /*var BestScores = scores.AsParallel().Select((score) => new ObservableValue(score.BestScore)).ToList();
-            var AvgScores = scores.AsParallel().Select((score) => new ObservableValue(score.AvarageScore)).ToList();
-            var WorstScores = scores.AsParallel().Select((score) => new ObservableValue(score.WorstScore)).ToList();
-
-            seriesBest.Values.AddRange(BestScores);
-            seriesAvg.Values.AddRange(AvgScores);
-            seriesWorst.Values.AddRange(WorstScores);
-            */
+          
             foreach (var specimen in scores)
             {
 

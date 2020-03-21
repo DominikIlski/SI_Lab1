@@ -8,7 +8,7 @@ namespace Algorytm_Ewolucyjny.Models
     {
 
 
-        public virtual List<Town> Crossover(List<Town> P1, List<Town> P2) { return P2; }
+        public virtual(List<Town> geneticCode , double? score) Crossover(List<Town> P1,(List<Town> geneticCode , double? score) P2) { return P2; }
 
 
     }
