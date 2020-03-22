@@ -34,7 +34,7 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
             EvaluationFunction = evaluationFunction;
             SelectionAlgorithm.EvaluationFunction = EvaluationFunction;
             //remebmer to test if makeMixedWorks
-            Generation = new List<Individual>(population.CreatNewGeneration());
+            Generation = new List<Individual>(population.CreateMixedPopulation());
             Scores = MakeGenetic(Generation);
             FinalScore = Scores;
 

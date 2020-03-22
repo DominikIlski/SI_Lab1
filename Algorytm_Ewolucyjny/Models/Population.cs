@@ -52,7 +52,8 @@ namespace Algorytm_Ewolucyjny.Services
             for (int i = 0; i < PopSize; i++)
             {
                 var townHelper = new List<Town>(firstChormosome);
-                townHelper.Swap(0, i);
+                for(int j = 0; j < firstChormosome.Count; j++)
+                    townHelper.Swap(0, j);
                 greedyGeneration.Add(new Individual(townHelper));
                 //EvaluationFunction.EvaluateIndividual(greedyGeneration[i]);
 
@@ -74,14 +75,17 @@ namespace Algorytm_Ewolucyjny.Services
 
             int greedyPopSize = PopSize - randomPopSize;
 
+            var popSize = PopSize;
+
             PopSize = greedyPopSize;
 
             greedy.Evaluation(EvaluationFunction, this);
 
             generation.AddRange(greedy.SavedPopulation);
 
+            
 
-            for (int i = 0; i < PopSize; i++)
+            for (int i = greedyPopSize; i < popSize; i++)
             {
                 generation.Add(new Individual(firstChormosome));
                 generation[i].Chromosome.Shuffle();

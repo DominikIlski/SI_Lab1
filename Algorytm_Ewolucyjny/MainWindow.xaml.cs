@@ -52,6 +52,9 @@ namespace Algorytm_Ewolucyjny
             CrossingAlgorithm = new CrossingAlgorithm();
             SelectionAlgorithm = new SelectionAlgorithm();
             Scores = new List<(double BestScore, double AvarageScore, double WorstScore)>();
+            FileService.FirstLoad();
+
+
 
             SeriesCollection = new SeriesCollection
             {
@@ -143,14 +146,14 @@ namespace Algorytm_Ewolucyjny
 
             var finalScores = AlgorithmCourse.GetScores();
             Scores = finalScores;
-            //InitializeChart(finalScores);
+            InitializeChart(finalScores);
 
         }
 
         public void tester()
         {
             //remember to use Inversion
-            MutationAlgorithm = new Swap();
+            MutationAlgorithm = new Inversion();
             CrossingAlgorithm = new Ordered();
             SelectionAlgorithm = new Tournament(ParseInt(Tour.Text));
 
@@ -160,6 +163,8 @@ namespace Algorytm_Ewolucyjny
         {
 
             SeriesCollection.Clear();
+
+            scores = scores.Where((x, i) => i % 25 == 0).ToList();
 
             var r = new Random();
             var seriesBest = new LineSeries();

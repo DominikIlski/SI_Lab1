@@ -75,7 +75,10 @@ namespace Algorytm_Ewolucyjny.Services
            
         }
 
-
+        public void FirstLoad()
+        {
+            LoadAgglomeration("D:\\gitProjects\\SI_Lab1\\Algorytm_Ewolucyjny\\EA DATA\\berlin11_modified.tsp");
+        }
 
         public void SaveFile(List<(double BestScore, double AvarageScore, double WorstScore)> Scores)
         {
