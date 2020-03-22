@@ -17,15 +17,16 @@ namespace Algorytm_Ewolucyjny.Services
 
         }
 
-        public double EvaluateSpecimen(List<Town> specimen)
+        public void EvaluateIndividual(Individual individual)
         {
+            var chromosome = individual.Chromosome;         
             double score = 0;
-            for (int i = 1; i < specimen.Count; i++)
+            for (int i = 1; i < chromosome.Count; i++)
             {
-                score += CountDistance(specimen[i - 1], specimen[i]);
+                score += CountDistance(chromosome[i - 1], chromosome[i]);
             }
-            score += CountDistance(specimen[specimen.Count - 1], specimen[0]);
-            return score;
+            score += CountDistance(chromosome[chromosome.Count - 1], chromosome[0]);
+            individual.Score = score;
         }
 
 

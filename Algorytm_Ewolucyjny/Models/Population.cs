@@ -12,52 +12,52 @@ namespace Algorytm_Ewolucyjny.Services
         public int PopSize { set; get; }
 
         Agglomeration Agglomeration { set; get; }
-        
+        EvaluationFunction EvaluationFunction { set; get; }
 
-        public Population(int popSize, Agglomeration agglomeration)
+        public Population(int popSize, Agglomeration agglomeration, EvaluationFunction evaluationFunction)
         {
             PopSize = popSize;
             Agglomeration = agglomeration;
+            EvaluationFunction = evaluationFunction;
             
         }
 
 
         
 
-        public List<List<Town>> CreatNewGeneration()
+        public List<Individual> CreatNewGeneration()
         {
             
-            var specimenElement = Agglomeration.GetAgglomeration();
-            var generation = new List<List<Town>>();
+            var firstChormosome = Agglomeration.GetAgglomeration();
+            var generation = new List<Individual>();
             
             for (int i = 0; i < PopSize; i++)
             {
-                generation.Add(new List<Town>(specimenElement));
+                generation.Add(new Individual(firstChormosome));
+                generation[i].Chromosome.Shuffle();          
+                EvaluationFunction.EvaluateIndividual(generation[i]);
             }
-            foreach (var specimen in generation)
-            {
-
-                specimen.Shuffle();
-
-            }
+           
+           
 
             return generation;
 
         }
 
-        public List<List<Town>> CreatGreedyGeneration()
+        public List<Individual> CreatGreedyGeneration()
         {
-            var townList = Agglomeration.GetAgglomeration();
-            var greedyGeneration = new List<List<Town>>();
+            var firstChormosome = Agglomeration.GetAgglomeration();
+            var greedyGeneration = new List<Individual>();
 
-            for (int i = 0; i < townList.Count; i++)
+            for (int i = 0; i < firstChormosome.Count; i++)
             {
-                var townHelper = new List<Town>(townList);
+                var townHelper = new List<Town>(firstChormosome);
                 townHelper.Swap(0, i);
-                greedyGeneration.Add(townHelper);
-
+                greedyGeneration.Add(new Individual(townHelper));
+                EvaluationFunction.EvaluateIndividual(greedyGeneration[i]);
 
             }
+
             
             return greedyGeneration;
         }

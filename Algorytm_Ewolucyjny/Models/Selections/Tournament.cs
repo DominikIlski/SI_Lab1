@@ -30,7 +30,7 @@ namespace Algorytm_Ewolucyjny.Models.Selections
             {
                 var randomNumber = Extensions.GenereteRandom() * list.Count;
                 var parseHelper = (int)Math.Floor(randomNumber);
-                var scoreHelper = EvaluationFunction.EvaluateSpecimen(list[parseHelper]);
+                var scoreHelper = EvaluationFunction.EvaluateIndividual(list[parseHelper]);
                 if(scoreHelper < score)
                 {
                     bestParticipant = new List<Town>(list[parseHelper]);

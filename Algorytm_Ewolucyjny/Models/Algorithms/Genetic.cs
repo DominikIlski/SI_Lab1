@@ -72,7 +72,7 @@ namespace Algorytm_Ewolucyjny.Models.Algorithms
                      
                     newPopulation.Add(O1);
                    
-                    var O1Score = EvaluationFunction.EvaluateSpecimen(O1);
+                    var O1Score = EvaluationFunction.EvaluateIndividual(O1);
                    
 
                     BestScore = O1Score < BestScore ? O1Score : BestScore;
