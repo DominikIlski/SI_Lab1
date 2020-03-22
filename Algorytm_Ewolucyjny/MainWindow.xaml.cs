@@ -125,28 +125,40 @@ namespace Algorytm_Ewolucyjny
         private void RunAlgorithm_Click(object sender, RoutedEventArgs e)
         {
          
-
-            
-
-            tester();
-
-            AlgorithmCourse = new AlgorithmCourse(ParseInt(PopSize.Text), FileService.Agglomeration);
-            AlgorithmCourse.SetAlgorithm(new Genetic(ParseDouble(Pm.Text), ParseDouble(Px.Text),
-                SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
             Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            AlgorithmCourse.Run();
+            
+            
             stopWatch.Stop();
 
-            TimeSpan ts = stopWatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            ts.Hours, ts.Minutes, ts.Seconds,
-            ts.Milliseconds / 10);
-            MessageBox.Show(elapsedTime);
 
-            var finalScores = AlgorithmCourse.GetScores();
-            Scores = finalScores;
-            InitializeChart(finalScores);
+            var iterationsData = new List<(double BestScore, double AvarageScore, double WorstScore)>();
+
+            var numberOfCals = ParseInt(NumberOfCals.Text);
+
+            for (int i = 0; i < numberOfCals; i++)
+            {
+                tester();
+
+                AlgorithmCourse = new AlgorithmCourse(ParseInt(PopSize.Text), FileService.Agglomeration);
+                AlgorithmCourse.SetAlgorithm(new Genetic(ParseDouble(Pm.Text), ParseDouble(Px.Text),
+                    SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
+                stopWatch.Start();
+                AlgorithmCourse.Run();
+                stopWatch.Stop();
+
+                TimeSpan ts = stopWatch.Elapsed;
+                string elapsedTime = String.Format("{0:00}:{1:00}.{2:00}",
+                ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+                elapsedTimeBox.Text = "Czas " + elapsedTime;
+
+                var finalScores = AlgorithmCourse.GetScores();
+                Scores = finalScores;
+                InitializeChart(finalScores);
+                iterationsData.Add(finalScores[finalScores.Count - 1]);
+            }
+
+            if (numberOfCals > 1) Scores = iterationsData;
 
         }
 

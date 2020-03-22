@@ -125,6 +125,7 @@
 
                 </Button>
 
+                <TextBlock x:Name="elapsedTimeBox" Margin="0 0 0 -5" Foreground="#FFC0C000" Text="Czas = 0.0.0" FontWeight="Bold" TextWrapping="Wrap" FontSize="20"  FontFamily="Bradley Hand ITC" />
 
 
 
