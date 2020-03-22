@@ -12,28 +12,31 @@ namespace Algorytm_Ewolucyjny.Models
         public override void Evaluation(EvaluationFunction evaluationFunction, Population population)
         {
             EvaluationFunction = evaluationFunction;
-            Generation = new List<List<Town>>(population.CreatGreedyGeneration());
-            var query = Generation.AsParallel().Select(x => MakeGreedy(x)).ToList();
+            Generation = new List<Individual>(population.CreatGreedyGeneration());
+            SavedPopulation = Generation.AsParallel().Select(x => MakeGreedy(x)).ToList();
             //FinalScore = query.Select(x => evaluationFunction.EvaluateSpecimen(x)).ToList();
             //FinalScore.Sort();
 
         }
 
-        private List<Town> MakeGreedy(List<Town> specimen)
+        private Individual MakeGreedy(Individual individual)
         {
-            var startingTown = specimen[0];
+
+            var chromosome = individual.Chromosome;
+
+            var startingTown = chromosome[0];
             var visitedTowns = new HashSet<Town>
             {
                 startingTown
             };
             var currentTown = startingTown;
 
-            while (visitedTowns.Count < specimen.Count)
+            while (visitedTowns.Count < chromosome.Count)
             {
                 var minDistance = Double.MaxValue;
                 var minTown = new Town();
 
-                foreach (var town in specimen)              
+                foreach (var town in chromosome)              
                 {
                     if (visitedTowns.Contains(town)) continue;
 
@@ -51,7 +54,11 @@ namespace Algorytm_Ewolucyjny.Models
                 currentTown = minTown;
             }
 
-            return visitedTowns.ToList();
+            var greedyIndividual = new Individual(visitedTowns.ToList());
+
+            EvaluationFunction.EvaluateIndividual(greedyIndividual);
+
+            return greedyIndividual;
         }
 
         

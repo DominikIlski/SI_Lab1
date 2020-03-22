@@ -11,11 +11,19 @@ namespace Algorytm_Ewolucyjny.Models
         public double? Score { set; get; }
 
 
-        public Individual(List<Town> chromosome)
+        public Individual(List<Town> chromosome, double? score = null)
         {
 
-            Chromosome = chromosome;
-            Score = null;
+            Chromosome = new List<Town>(chromosome);
+            Score = score;
+
+        }
+
+        public Individual(Individual other)
+        {
+
+            Chromosome = new List<Town>(other.Chromosome);
+            Score = other.Score;
 
         }
 

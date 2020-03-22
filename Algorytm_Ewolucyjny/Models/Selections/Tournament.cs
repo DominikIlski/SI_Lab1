@@ -19,30 +19,30 @@ namespace Algorytm_Ewolucyjny.Models.Selections
 
         
 
-        public override List<Town> Selection(List<List<Town>> list)
+        public override Individual Selection(List<Individual> list)
         {
 
-            var participants = new List<(List<Town> Specimen, double Score)>();
-            
-            List<Town> bestParticipant = new List<Town>(list[0]);
+            var bestIndex = 0;
             var score = Double.MaxValue;
             for(int i = 0; i< ParticipantsNumber; i++)
             {
-                var randomNumber = Extensions.GenereteRandom() * list.Count;
-                var parseHelper = (int)Math.Floor(randomNumber);
-                var scoreHelper = EvaluationFunction.EvaluateIndividual(list[parseHelper]);
-                if(scoreHelper < score)
-                {
-                    bestParticipant = new List<Town>(list[parseHelper]);
-                    score = scoreHelper;
-                }
+                
+                var randomNumber = (int)Math.Floor(Extensions.GenereteRandom() * list.Count);
 
+                var scoreOfParticipant = list[randomNumber].Score ?? 0;
+
+                if (scoreOfParticipant is 0) throw new Exception("Problem with participant score");
+
+                if (scoreOfParticipant < score)
+                {
+                    bestIndex = randomNumber;
+                    score = scoreOfParticipant;
+                }
+               
 
             }
 
-            
-
-            return bestParticipant;
+            return new Individual(list[bestIndex]);
         }
 
 

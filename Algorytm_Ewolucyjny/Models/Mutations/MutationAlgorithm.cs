@@ -8,7 +8,7 @@ namespace Algorytm_Ewolucyjny.Models
     {
 
 
-        public virtual List<Town> Mutate(List<Town> specimen, double Pm) { return specimen; }
+        public virtual Individual Mutate(Individual specimen, double Pm) { return specimen; }
 
     }
 }

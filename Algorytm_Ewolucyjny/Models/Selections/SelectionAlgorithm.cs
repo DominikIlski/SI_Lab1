@@ -9,7 +9,7 @@ namespace Algorytm_Ewolucyjny.Models
     {
 
         public EvaluationFunction EvaluationFunction;
-        public virtual List<Town> Selection (List<List<Town>> population){ return population[0]; }
+        public virtual Individual Selection(List<Individual> list) { return list[0]; }
 
 
     }

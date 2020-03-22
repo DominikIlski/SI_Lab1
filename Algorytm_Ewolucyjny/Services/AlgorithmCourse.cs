@@ -19,8 +19,9 @@ namespace Algorytm_Ewolucyjny.Services
         {
 
             
-            Population = new Population(popSize, agglomeration);
+            
             EvaluationFunction = new EvaluationFunction(agglomeration.EdgeWeightType);
+            Population = new Population(popSize, agglomeration, EvaluationFunction);
             Algorithm = new Algorithm();
             
             

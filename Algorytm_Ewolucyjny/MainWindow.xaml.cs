@@ -138,6 +138,7 @@ namespace Algorytm_Ewolucyjny
 
         public void tester()
         {
+            //remember to use Inversion
             MutationAlgorithm = new Swap();
             CrossingAlgorithm = new Ordered();
             SelectionAlgorithm = new Tournament(ParseInt(Tour.Text));
