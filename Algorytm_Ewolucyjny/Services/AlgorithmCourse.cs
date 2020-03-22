@@ -1,6 +1,7 @@
 ﻿using Algorytm_Ewolucyjny.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -36,8 +37,11 @@ namespace Algorytm_Ewolucyjny.Services
 
         public void Run()
         {
+            
             Algorithm.Evaluation(EvaluationFunction, Population);
             WasRunning = true;
+            
+
         }
 
         public List<(double BestScore, double AvarageScore, double WorstScore)> GetScores()

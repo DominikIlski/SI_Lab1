@@ -24,6 +24,7 @@ using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using Microsoft.Win32;
 using System.IO;
+using System.Diagnostics;
 
 namespace Algorytm_Ewolucyjny
 {
@@ -129,10 +130,20 @@ namespace Algorytm_Ewolucyjny
             AlgorithmCourse = new AlgorithmCourse(ParseInt(PopSize.Text), FileService.Agglomeration);
             AlgorithmCourse.SetAlgorithm(new Genetic(ParseDouble(Pm.Text), ParseDouble(Px.Text),
                 SelectionAlgorithm, CrossingAlgorithm, MutationAlgorithm, ParseInt(NumberOfGenerations.Text)));
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             AlgorithmCourse.Run();
+            stopWatch.Stop();
+
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            ts.Hours, ts.Minutes, ts.Seconds,
+            ts.Milliseconds / 10);
+            MessageBox.Show(elapsedTime);
+
             var finalScores = AlgorithmCourse.GetScores();
             Scores = finalScores;
-            InitializeChart(finalScores);
+            //InitializeChart(finalScores);
 
         }
 
@@ -173,15 +184,15 @@ namespace Algorytm_Ewolucyjny
             SeriesCollection.Add(seriesBest);
 
             
-            /*var BestScores = scores.AsParallel().Select((score) => new ObservableValue(score.BestScore)).ToList();
+            var BestScores = scores.AsParallel().Select((score) => new ObservableValue(score.BestScore)).ToList();
             var AvgScores = scores.AsParallel().Select((score) => new ObservableValue(score.AvarageScore)).ToList();
             var WorstScores = scores.AsParallel().Select((score) => new ObservableValue(score.WorstScore)).ToList();
 
             seriesBest.Values.AddRange(BestScores);
             seriesAvg.Values.AddRange(AvgScores);
             seriesWorst.Values.AddRange(WorstScores);
-            */
-            foreach (var specimen in scores)
+            
+            /*foreach (var specimen in scores)
             {
 
                 seriesBest.Values.Add(new ObservableValue(specimen.BestScore));
@@ -189,7 +200,7 @@ namespace Algorytm_Ewolucyjny
                 seriesWorst.Values.Add(new ObservableValue(specimen.WorstScore));
 
 
-            }
+            }*/
             
             
 
